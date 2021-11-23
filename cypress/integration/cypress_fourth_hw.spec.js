@@ -1,7 +1,11 @@
 describe ('', () => {
 
-  it('', () => {
-
+  beforeEach(() => {
+    cy.login();
   })
-  
+
+  it('', () => {
+   
+  })
+
 })
