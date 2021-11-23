@@ -23,3 +23,27 @@
 //
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
+
+Cypress.Commands.add('login', (username = 'Pupka', password = 'Pupka@123') => {
+cy.visit('https://demoqa.com/login');
+
+cy.get('#userName')
+.type(username);
+            
+cy.get('#password')
+.type(password);
+            
+cy.get('#login')
+.click({ force: true });
+
+cy.url()
+.should('include','/profile');
+
+cy.get('#userName-value')
+.contains('Pupka')
+.should('exist');
+
+cy.get('#submit.btn.btn-primary')
+.contains('Log out')
+.should('exist');
+})
