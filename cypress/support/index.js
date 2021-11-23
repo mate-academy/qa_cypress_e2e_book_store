@@ -18,3 +18,11 @@ import './commands'
 
 // Alternatively you can use CommonJS syntax:
 // require('./commands')
+
+Cypress.Commands.add('login', (username = 'Kurt_Volker', password = 'Qwerty123!') => {
+    cy.visit('/login');
+    cy.get('#userName').type(username);
+    cy.get('#password').type(password);
+    cy.get('#login').click();
+    cy.url().should('include', '/profile');
+});
