@@ -21,19 +21,15 @@ const book = {
   author: 'Axel Rauschmayer',
   publisher: `O'Reilly Media`
 }
-
-describe('Basic level', () => {
+// To make it work, you need to uncomment the command Cypress.Cookies.defaults in commands.js
+describe('Basic level after change in Advanced level', () => {
   it('Login as your registered account and check your username after login username', () => {
     cy.visit('/login');
-    cy.get('#userName').type(user.userName);
-    cy.get('#password').type(user.password);
-    cy.get('#login').click();
-    cy.url().should('include', '/profile')
     cy.get('#userName-value').should('contain', user.userName);
   })
 
   it('Add book the "Speaking JavaScript" in your collection', () => {
-    cy.login();
+    cy.visit('/login');
     cy.contains('.btn.btn-light', 'Book Store').click();
     cy.get('#searchBox').type('{selectall}').type(book.title).type('{enter}');
     cy.get('.action-buttons').should('contain', book.title).click();
@@ -48,7 +44,7 @@ describe('Basic level', () => {
   })
 
   it('Assert "Speaking JavaScript" in your shopping list and delete the book from your list', () => {
-    cy.login();
+    cy.visit('/login');
     cy.contains('.btn.btn-light', 'Profile').click();
     cy.url().should('include', '/profile');
     cy.get('.rt-tbody').should('contain', book.title);
@@ -61,9 +57,3 @@ describe('Basic level', () => {
     cy.get('#searchBox').type('{selectall}').type('{backspace}');
   })
 });
-
-describe('Advanced level', () => {
-  it('Rewrite Login method',( ) => {
-    cy.login1();
-  })
-})
