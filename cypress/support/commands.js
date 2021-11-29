@@ -24,8 +24,9 @@
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
 
+// Basic
 Cypress.Commands.add('login', (username = 'Pupka', password = 'Pupka@123') => {
-cy.visit('https://demoqa.com/login');
+cy.visit('/login');
 
 cy.get('#userName')
 .type(username);
@@ -46,4 +47,4 @@ cy.get('#userName-value')
 cy.get('#submit.btn.btn-primary')
 .contains('Log out')
 .should('exist');
-})
+});
