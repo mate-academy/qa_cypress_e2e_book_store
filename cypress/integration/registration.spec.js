@@ -15,7 +15,7 @@ describe('User can', () => {
       cy.url().should('include', '/profile');
   });
 
-  it('go to the Store app, search for a book and add it to collection', () => {
+  it('go to the Store app, search for a book, add it to collection and then delete', () => {
     cy.get('#userName-value').should('contain', user.userName);
     cy.contains('#item-2', 'Book Store').click();
     cy.get('#searchBox').type(book.title);
@@ -24,15 +24,11 @@ describe('User can', () => {
     cy.on('window:alert', (str) => {
       expect(str).to.equal(`Book added to your collection.`)
     });
-  });
-
-  it('delete the book from shopping list', () => {
-    cy.get('#userName-value').should('contain', user.userName);
     cy.visit('https://demoqa.com/profile');
-    cy.get('#delete-record-undefined').click();
+    cy.get('.rt-tr.-odd').should('contain', book.title);
+    cy.get('#delete-record-undefined > svg > path').click();
     cy.get('#closeSmallModal-ok').click();
-    cy.on('window:alert', (str) => {
-      expect(str).to.equal(`Book deleted.`)
-    });
+    cy.visit('https://demoqa.com/profile');
+    cy.contains(book.title).should('not.exist');
   });
 });
