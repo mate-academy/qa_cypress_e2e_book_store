@@ -9,11 +9,12 @@ describe('User should have an ability', () => {
     name:'Speaking JavaScript',
     author:'Axel Rauschmayer'
   };
-  beforeEach(() => {
+  before(() => {
     cy.login();
   });
 
   it('successefully login', () => {
+    cy.visit('/profile');
        cy.get('#userName-value')
      .should('contain', user.username);
   });
