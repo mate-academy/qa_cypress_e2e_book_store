@@ -26,10 +26,8 @@
 
 Cypress.Commands.add('login', () => {
   cy.fixture('user').then(user => {
-    cy.get('#userName').type(user.username)
-    cy.get('#password').type(user.password + '{enter}')
-    cy.url().should('include', '/profile')
-    cy.get('#userName-value').should('contain.text', 'asdf')
+    cy.get('#userName').type(user.username);
+    cy.get('#password').type(user.password + '{enter}');
   });
 });
 
@@ -54,9 +52,7 @@ Cypress.Commands.add('addBook', () => {
   cy.get('#gotoStore').click();
   cy.get('#searchBox').type('Speaking JavaScript');
   cy.contains('a', 'Speaking JavaScript').click();
-  cy.get('.text-right > #addNewRecordButton').click();
-  cy.visit('/profile');
-  cy.contains('a', 'Speaking JavaScript').should('exist');
+  cy.contains('button', 'Add To Your Collection').click();
 });
 
 Cypress.Commands.add('deleteBooks', () => {
