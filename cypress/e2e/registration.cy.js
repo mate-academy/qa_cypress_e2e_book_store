@@ -2,12 +2,19 @@
 
 describe('User should', () => {
 
-  const username = 'Cy_test';
-  const password = 'Cy_test123@';
-  const bookName = 'Speaking JavaScript';
+  const user = {
+    username: 'Cy_test',
+    password: 'Cy_test123@',
+  };
+  const bookInfo = {
+    bookName: 'Speaking JavaScript',
+    author: 'Axel Rauschmayer',
+    publisher: 'O\'Reilly Media',
+    description:'Like it or not, JavaScript is everywhere these days-from',
+  };
 
   beforeEach(() => {
-    cy.login(username, password);
+    cy.login(user.username, user.password);
   });
 
   it('login successfully', () => {
@@ -15,7 +22,7 @@ describe('User should', () => {
     .should('contain', '/profile');
 
     cy.get('#userName-value')
-    .should('have.text', username);
+    .should('have.text', user.username);
   });
 
   it('go to the bookstore and search the book', () => {
@@ -23,11 +30,18 @@ describe('User should', () => {
     .click();
 
     cy.get('#searchBox')
-    .type(bookName);
+    .type(bookInfo.bookName);
 
-    cy.contains('a', bookName)
+    cy.contains('a', bookInfo.bookName)
     .click();
-    
+
+    cy.contains('.books-wrapper', bookInfo.bookName)
+    .should('contain', bookInfo.author)
+    .and('contain', bookInfo.publisher);
+
+    cy.get('#description-wrapper')
+    .should('contain', bookInfo.description);
+
     cy.contains('#addNewRecordButton', 'Add To Your Collection')
     .click();
 
@@ -35,12 +49,16 @@ describe('User should', () => {
       expect(str).to.equal('Book added to your collection.')
     });
 
+    cy.visit('/profile');
+
+    cy.get('[class="rt-tbody"]')
+    .should('contain.text', bookInfo.bookName);
   });
 
   it('delete the selected book from the account', () => {
     
     cy.get('[class="rt-tbody"]')
-    .should('contain.text', bookName);
+    .should('contain.text', bookInfo.bookName);
 
     cy.get('#delete-record-undefined')
     .click();
@@ -52,7 +70,7 @@ describe('User should', () => {
       expect(str).to.equal('Book deleted.');
     });
 
-    cy.contains('a', bookName)
+    cy.contains('a', bookInfo.bookName)
     .not();
   });
 });
