@@ -7,7 +7,6 @@ describe('Name of the group', () => {
   beforeEach(() => {
     cy.visit('/');
     cy.login();
-            
   });
 
   it('should add book to your collection', () => {
