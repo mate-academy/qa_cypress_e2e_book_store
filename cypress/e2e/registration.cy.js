@@ -1,17 +1,17 @@
 /// <reference types='cypress' />
 
-describe('Name of the group', () => {
+describe('Cypress Homework 4', () => {
   const user = 'UserMO';
 
   beforeEach(() => {
     cy.login();
   });
 
-  it('User logged in', () => {
+  it('Should contain username on the page.', () => {
     cy.get('#userName-value').should('contain', user);
   });
 
-  it('User logged in', () => {
+  it('User can add and delete book form books users list', () => {
     cy.get('#gotoStore')
       .click();
 
