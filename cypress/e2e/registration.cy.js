@@ -11,10 +11,14 @@ describe('jun-22', () => {
     
   });
 
-  it('successfully login and add a book', () => {
+  it('successfully login', () => {
 
     cy.get('#userName-value')
     .should('contain', user.username);
+
+  });
+
+    it('add a book', () => {
 
     cy.get('[id="gotoStore"]')
     .click();
@@ -31,6 +35,22 @@ describe('jun-22', () => {
     cy.on('window:alert', (str) => {
      expect(str).to.equal(`Book added to your collection.`)
     });
+
+    cy.get('[class="navbar-toggler-icon"]')
+    .click();
+
+    cy.contains('span', 'Profile')
+    .click();
+
+    cy.contains('[class="rt-tr-group"]', 'Speaking JavaScript')
+    .should('exist');
+
+    cy.contains('[class="rt-tr-group"]', 'Axel Rauschmayer')
+    .should('exist');
+
+    cy.contains('[class="rt-tr-group"]', 'Reilly Media')
+    .should('exist');
+    
   });
 
   it('delete the book', ()  => {
@@ -50,5 +70,9 @@ describe('jun-22', () => {
     cy.on('window:alert', (str) => {
       expect(str).to.equal(`Book deleted.`)
     });
+
+    cy.contains('[class="rt-table"]', 'Speaking JavaScript')
+    .should('not.exist');
+    
   });
 });

@@ -4,9 +4,8 @@ module.exports = {
     // You may want to clean this up later by importing these.
     setupNodeEvents(on, config) {
       return require('./cypress/plugins/index.js')(on, config)
-    }, 
-
-    viewportHeight: 700,
-    viewportWidth: 600,
+    },
+    viewportWidth: 700,
+    viewportHeight: 600,
   },
 }

@@ -29,4 +29,8 @@ Cypress.Commands.add('login', (username = 'KhrystynaBorys', password = 'Khrystyn
     cy.get('[placeholder="Password"]').type(password);
     cy.get('[id="login"]').click();
     cy.url().should('include', '/profile');
+
 });
+
+
+
