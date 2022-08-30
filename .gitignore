@@ -1,0 +1,3 @@
+cypress_fourth_hw/*
+!cypress_fourth_hw/cypress/integration/cypress_fourth_hw.spec.js
+!*.json
