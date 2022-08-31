@@ -1,25 +1,16 @@
 /// <reference types='cypress' />
 
-/// <reference types='cypress' />
-
 describe('User should have an abillity to', () => {
   beforeEach(() => {
 cy.visit('https://demoqa.com/login');
 cy.login();
-// cy.get('#userName')
-// .type('Superwoman');
-// cy.get('[placeholder="Password"]')
-// .type('Password123@{enter}');
-// cy.url()
-// .should('include', '/profile')
-  });
 
   it('successfully login', () => {
-    cy.viewport(1200,720)
-
+    cy.get('#userName-value')
+    .should('contain', user.username);
   });
 
-  it('go to book store and search for the book', () => {
+it('go to book store and search for the book', () => {
     cy.viewport(1200,720)
     cy.contains('#item-2', 'Book Store')
     .click()
