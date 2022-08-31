@@ -17,8 +17,13 @@ Cypress.on('uncaught:exception', () => {
   return false
 });
 
+Cypress.Cookies.defaults({
+  preserve: ['token', 'UserID', 'expires', 'userName']
+});
+
 // Import commands.js using ES2015 syntax:
 import './commands'
+// 
 
 // Alternatively you can use CommonJS syntax:
 // require('./commands')
