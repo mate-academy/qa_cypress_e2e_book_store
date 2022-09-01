@@ -22,4 +22,15 @@
 //
 //
 // -- This will overwrite an existing command --
-// Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
+
+Cypress.Commands.add('login',(username = 'Maryna_test', password = '123456Mk*') => {
+  cy.request('POST', '/Account/v1/login',{
+    userName: username,
+    password: password
+  }).then(resp =>{
+    cy.setCookie('token', resp.body.token);
+    cy.setCookie('expires', resp.body.expires);
+    cy.setCookie('userID', resp.body.userId);
+    cy.setCookie('userName', resp.body.username);
+  });  
+});

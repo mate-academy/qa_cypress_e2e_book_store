@@ -1,1 +1,5 @@
-{}
+{
+  "baseUrl":"https://demoqa.com",
+  "viewportHeight":2000,
+  "defaultCommandTimeout":20000
+}
