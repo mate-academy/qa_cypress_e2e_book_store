@@ -23,3 +23,24 @@
 //
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
+
+
+Cypress.Commands.add('login', (username = 'UserMO', password = '12345Qwert!') => {
+    cy.visit("/login");
+    cy.get('#userName').type('UserMO');
+    cy.get('#password').type('12345Qwert!');
+    cy.get('#login').click();
+    cy.url().should('include', '\profile')
+});
+
+Cypress.Commands.add('checkAlert1', () => {
+    cy.once('window:alert', (str) => {
+        expect(str).to.equal(`Book added to your collection.`);
+      });
+});
+
+Cypress.Commands.add('checkAlert2', () => {
+    cy.once('window:alert', (str) => {
+        expect(str).to.equal(`Book deleted.`);
+      });
+});
