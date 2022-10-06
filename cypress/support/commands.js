@@ -1,4 +1,3 @@
-// ***********************************************
 // This example commands.js shows you how to
 // create various custom commands and overwrite
 // existing commands.
@@ -23,3 +22,14 @@
 //
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
+Cypress.Commands.add('findByPlaceholder', (placeholder) => {
+  cy.get(`[placeholder="${placeholder}"]`)
+});
+
+Cypress.Commands.add('login', (username = 'fbi', password = 'Secret13!') => {
+  cy.visit('https://demoqa.com/login');
+  cy.findByPlaceholder('UserName').type(username);
+  cy.findByPlaceholder('Password').type(password);
+  cy.get('#login').click();
+  cy.url().should('include', '/profile');
+});
