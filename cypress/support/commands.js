@@ -23,3 +23,12 @@
 //
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
+
+const cypressConfig = require("../../cypress.config");
+
+Cypress.Commands.add('login', (username, password) => {
+    cy.get('[id="userName"]').type(username);
+    cy.get('[id="password"]').type(password);
+    cy.get('[id="login"]').click();
+    cy.url().should('include', '/profile');
+});
