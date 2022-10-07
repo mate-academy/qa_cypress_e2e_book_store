@@ -70,7 +70,7 @@ Cypress.Commands.add('loginRequest', () => {
     .then((response) => {
       cy.setCookie('token', response.body.token);
       cy.setCookie('userID', response.body.userId);
-      cy.setCookie('isActive', response.body.isActive); //false by default
+      cy.setCookie('userName', response.body.usesName);
       });
 });
 
