@@ -5,7 +5,6 @@ Cypress.Commands.add('login', (username, password) => {
   cy.get('#password').type(password);
   cy.get('#login').click();
 });
-
 // Advanced login
 Cypress.Commands.add('loginRequest', (username, password) => {
   cy.request('POST', 'https://demoqa.com/Account/v1/Login', {userName: username, password: password}).then((response) => {
