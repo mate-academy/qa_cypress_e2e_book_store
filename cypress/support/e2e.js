@@ -14,7 +14,7 @@
 // ***********************************************************
 
 Cypress.on('uncaught:exception', () => {
-  return false
+  return false;
 });
 
 // Import commands.js using ES2015 syntax:
