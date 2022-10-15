@@ -27,11 +27,11 @@ App for testing: `https://demoqa.com/login`
 1. Click on [Add To Your Collection].
 1. Confirm popup. You can do it with cy.on():
 
-  ```js
-  cy.on('window:alert', (str) => {
-      expect(str).to.equal(`Book added to your collection.`)
-  })
-  ```
+    ```js
+    cy.on('window:alert', (str) => {
+        expect(str).to.equal(`Book added to your collection.`)
+    })
+    ```
 
 1. Go to your profile page.
 1. Assert 'Speaking JavaScript' in your shopping list.
