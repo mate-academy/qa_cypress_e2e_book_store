@@ -19,7 +19,7 @@ describe('Book Store app', () => {
     /*- assert your username after login username;*/    
     cy.get('#userName-value').should('contain.text', user.name)
     /*- asser new url;*/
-    cy.url().should('contain', '/profile')
+    cy.url().should('equal', 'https://demoqa.com/profile')
     /*Navigate to `Book store`.*/
     cy.get('#gotoStore').click()
     /*Type into search field 'Speaking JavaScript'.*/
