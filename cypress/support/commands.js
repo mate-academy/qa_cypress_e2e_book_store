@@ -40,7 +40,7 @@ Cypress.Commands.add('login', () => {
   });
 });
  
-Cypress.Commands.add('deleteBook', () => {
+Cypress.Commands.add('addBook', () => {
   cy.contains('.text', 'Book Store')
       .click({force: true});
     cy.get('#searchBox')
