@@ -1,5 +1,10 @@
 /// <reference types='cypress' />
 
+const user = {
+name: 'Den',
+password: 'Password1!'
+};
+
 describe('Book Store app', () => {
   before(() => {
     
@@ -8,8 +13,8 @@ describe('Book Store app', () => {
   it('user flow', () => {
     /*Login:*/
     cy.visit('https://demoqa.com/login')
-    cy.get('#userName').type('Den')
-    cy.get('#password').type('Password1!')
+    cy.get('#userName').type(user.name)
+    cy.get('#password').type(user.password)
     cy.get('#login').click()
     /*- assert your username after login username;*/    
     cy.get('#userName-value').should('contain.text', 'Den')
