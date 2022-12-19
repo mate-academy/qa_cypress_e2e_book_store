@@ -12,14 +12,14 @@ describe('Book Store app', () => {
 
   it('user flow', () => {
     /*Login:*/
-    cy.visit('https://demoqa.com/login')
+    cy.visit('/login')
     cy.get('#userName').type(user.name)
     cy.get('#password').type(user.password)
     cy.get('#login').click()
     /*- assert your username after login username;*/    
     cy.get('#userName-value').should('contain.text', user.name)
     /*- asser new url;*/
-    cy.url().should('contain', 'https://demoqa.com/profile')
+    cy.url().should('contain', '/profile')
     /*Navigate to `Book store`.*/
     cy.get('#gotoStore').click()
     /*Type into search field 'Speaking JavaScript'.*/
