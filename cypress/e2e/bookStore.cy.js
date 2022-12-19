@@ -35,5 +35,6 @@ describe('Book Store app', () => {
     cy.get('.rt-table').should('contain.text', 'Speaking JavaScript')
     /*Delete Speaking JavaScript book from your list.*/
     cy.get('#delete-record-undefined').click()
+    cy.get('#closeSmallModal-ok').click()
   });
 });
