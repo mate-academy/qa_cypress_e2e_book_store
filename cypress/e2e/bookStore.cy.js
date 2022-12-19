@@ -50,7 +50,7 @@ describe('Book Store app', () => {
   it('should allow user to delete the book', () => {
     cy.login();
     cy.visit('/profile');
-    cy.deleteBook();
+    cy.addBook();
     cy.get('#delete-record-undefined')
       .click();
     cy.get('#closeSmallModal-ok')
