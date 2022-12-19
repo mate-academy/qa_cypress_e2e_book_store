@@ -23,7 +23,7 @@ describe('Book Store app', () => {
       .should('equal', Cypress.config().baseUrl + '/profile');
   });
 
-  it.only('should allow user to add the book', () => {
+  it('should allow user to add the book', () => {
     cy.login();
     cy.visit('/profile');
     cy.contains('.text', 'Book Store')
