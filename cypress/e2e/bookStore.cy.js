@@ -5,11 +5,6 @@ name: 'Den',
 password: 'Password1!'
 };
 
-describe('Book Store app', () => {
-  before(() => {
-    
-  });
-
   it('user flow', () => {
     /*Login:*/
     cy.visit('https://demoqa.com/login')
@@ -17,7 +12,7 @@ describe('Book Store app', () => {
     cy.get('#password').type(user.password)
     cy.get('#login').click()
     /*- assert your username after login username;*/    
-    cy.get('#userName-value').should('contain.text', 'Den')
+    cy.get('#userName-value').should('contain.text', 'user.name')
     /*- asser new url;*/
     cy.url().should('contain', 'https://demoqa.com/profile')
     /*Navigate to `Book store`.*/
