@@ -27,7 +27,7 @@ describe('Book Store app', () => {
     /*Click on 'Speaking JavaScript' book.*/
     cy.contains('a', 'Speaking JavaScript').click()
     /*- assert description of the book.*/
-    cy.contains('#description-wrapper', 'Like it or not, JavaScript is everywhere these days-from browser to server to mobile-and now you, too, need to learn the language or dive deeper than you have. This concise book guides you into and through JavaScript, written by a veteran programmer')
+    cy.get('#description-wrapper').should('contain.text', 'Like it or not, JavaScript is everywhere these days-from browser to server to mobile-and now you, too, need to learn the language or dive deeper than you have. This concise book guides you into and through JavaScript, written by a veteran programmer')
     /*Click on [Add To Your Collection].*/
     cy.contains('button', 'Add To Your Collection').click({force: true})
     /*Confirm popup. You can do it with cy.on():*/
