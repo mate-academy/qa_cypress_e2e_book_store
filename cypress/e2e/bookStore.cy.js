@@ -37,6 +37,12 @@ describe('Book Store app', () => {
     cy.on('window:alert', (str) => {
       expect(str).to.equal(`Book added to your collection.`)
     })
+    /*Deleting added books in collection at the end of test*/
+    cy.contains('.left-pannel', 'Book Store Application').contains('Profile').click();
+    cy.get('a').should('contain', 'Speaking JavaScript');
+    cy.contains('button', 'Delete All Books').click({force: true});
+    cy.contains('#closeSmallModal-ok', 'OK').click();
+    cy.get('#closeSmallModal-ok').click();
   });
 
   it('should allow user to delete a book from collection', () => {
