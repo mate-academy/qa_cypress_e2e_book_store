@@ -8,7 +8,7 @@ describe('Book Store app', () => {
     cy.visit('/')
   });
 
-  it('should let the user register', () => {
+  it('should let the user login, find the book, add the book, delete the book', () => {
     const { username, password } = generateUser();
 
     //checking the page
