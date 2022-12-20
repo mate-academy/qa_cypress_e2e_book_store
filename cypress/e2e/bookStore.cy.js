@@ -22,7 +22,7 @@ describe('Book Store app', () => {
 
     cy.url().should('include', 'profile');
 
-    cy.get('#gotoStore').click();
+    cy.get('#gotoStore').click({force: true});
 
     cy.get('#searchBox')
       .type('Speaking JavaScript');

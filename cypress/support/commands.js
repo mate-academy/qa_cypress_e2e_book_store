@@ -58,7 +58,7 @@ Cypress.Commands.add('addBook', () => {
   
     cy.wait(400);
     
-      cy.contains('.btn','Profile').click();
+    cy.contains('.btn','Profile').click();
 
     cy.get('.rt-tbody')
       .should('contain', 'Speaking JavaScript'); 

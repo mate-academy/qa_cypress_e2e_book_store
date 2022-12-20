@@ -33,7 +33,7 @@ describe('Book Store app', () => {
 
     cy.visit('/profile');
 
-    cy.get('#gotoStore').click();
+    cy.get('#gotoStore').click({force: true});
 
     cy.get('#searchBox')
       .type('Speaking JavaScript');
@@ -57,7 +57,7 @@ describe('Book Store app', () => {
       .should('contain', 'Speaking JavaScript')     
   });
 
-  it.('should provide user to delete book', () => {
+  it('should provide user to delete book', () => {
     
     cy.logIn();
 
