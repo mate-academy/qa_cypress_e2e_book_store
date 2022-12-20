@@ -6,13 +6,12 @@ password: 'Password1!'
 };
 
 describe('Book Store app', () => {
-  before(() => {
-    
+  beforeEach(() => {
+    cy.visit('/books')
   });
 
-  it('user flow', () => {
-    /*Login:*/
-    cy.visit('/login')
+  it('should allow user to login with registered creds', () => {
+    cy.contains('.left-pannel', 'Book Store Application').contains('Login').click()
     cy.get('#userName').type(user.name)
     cy.get('#password').type(user.password)
     cy.get('#login').click()
@@ -20,8 +19,12 @@ describe('Book Store app', () => {
     cy.get('#userName-value').should('contain.text', user.name)
     /*- asser new url;*/
     cy.url().should('equal', 'https://demoqa.com/profile')
+  });
+
+  it('should allow user to add a book to collection', () => {
+    cy.login();
     /*Navigate to `Book store`.*/
-    cy.get('#gotoStore').click()
+    cy.contains('.left-pannel', 'Book Store Application').contains('Book Store').click()
     /*Type into search field 'Speaking JavaScript'.*/
     cy.get('#searchBox').type('Speaking JavaScript')
     /*Click on 'Speaking JavaScript' book.*/
@@ -34,11 +37,25 @@ describe('Book Store app', () => {
     cy.on('window:alert', (str) => {
       expect(str).to.equal(`Book added to your collection.`)
     })
+  });
+
+  it('should allow user to delete a book from collection', () => {
+    cy.login();
+    /*Navigate to `Book store`.*/
+    cy.contains('.left-pannel', 'Book Store Application').contains('Book Store').click()
+    /*Type into search field 'Speaking JavaScript'.*/
+    cy.get('#searchBox').type('Speaking JavaScript')
+    /*Click on 'Speaking JavaScript' book.*/
+    cy.contains('a', 'Speaking JavaScript').click()
+    cy.contains('button', 'Add To Your Collection').click({force: true})
+    /*Confirm popup. You can do it with cy.on():*/
+    cy.on('window:alert', (str) => {
+      expect(str).to.equal(`Book added to your collection.`)
+    })    
     /*Go to your profile page.*/
     cy.contains('.left-pannel', 'Book Store Application').contains('Profile').click()
     /*Assert 'Speaking JavaScript' in your shopping list.*/
-    cy.get('a')
-      .should('contain', 'Speaking JavaScript');
+    cy.get('a').should('contain', 'Speaking JavaScript');
     /*Delete Speaking JavaScript book from your list.*/
     cy.get('#delete-record-undefined').click()
     cy.get('#closeSmallModal-ok').click()
