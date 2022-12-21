@@ -11,7 +11,7 @@ describe('Book Store app', () => {
   cy.visit('/login');
   });
 
-  it('should login with registered credentials', () => {
+  it('should allow user to login with registered creds', () => {
   cy.get('#userName')
     .type(user.username);
   cy.get('#password')
@@ -22,14 +22,14 @@ describe('Book Store app', () => {
     .should('include', '/profile');
   });
 
-  it('check for log in', () => {
+  it('should check if the user is logged in', () => {
   cy.login();
   cy.visit('/profile');
   cy.get('#userName-value')
     .should('contain', 'Malika');
   });
 
-  it('add a book to the bookmark', () => {
+  it('should add a book to the bookmark', () => {
     cy.login();
     cy.visit('/profile');
     cy.contains('.text', 'Book Store')
@@ -47,7 +47,7 @@ describe('Book Store app', () => {
     });
   });
 
-    it('delete a book', () => {
+    it('should delete a book from the bookmarks', () => {
       cy.login();
       cy.visit('/profile');
       cy.contains('.text', 'Profile')
