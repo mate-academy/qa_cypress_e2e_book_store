@@ -23,3 +23,32 @@
 //
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
+
+//const { generateInput } = require("../support/generation_input");
+
+//Cypress.Commands.add('registrationNewUser', () => {
+  //const user = generateInput();
+
+  //cy.visit('register')
+  //cy,get('#firstname').type()
+
+  //cy.request('POST', '/users', user)
+    //.then( response => ({ ...response.body.user, ...user}));
+
+//});
+
+Cypress.Commands.add('logInNewUser', () => {
+  
+   cy.request('POST', 'https://demoqa.com/Account/v1/Login',{
+      userName:'TestCypress',
+      password: 'TestCypress123!',
+      
+    })
+    .then(response => {
+      cy.setCookie('token',response.body.token);
+      cy.setCookie('userID',response.body.userId);
+      cy.setCookie('userName',response.body.username);
+      cy.setCookie('expires',response.body.expires);
+    })
+
+});
