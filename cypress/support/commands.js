@@ -38,11 +38,11 @@
 //});
 
 Cypress.Commands.add('logInNewUser', () => {
+  cy.fixture('fixtures').then((data) => {  
   
    cy.request('POST', 'https://demoqa.com/Account/v1/Login',{
-      userName:'TestCypress',
-      password: 'TestCypress123!',
-      
+      userName: data.username,
+      password: data.password,      
     })
     .then(response => {
       cy.setCookie('token',response.body.token);
@@ -50,5 +50,6 @@ Cypress.Commands.add('logInNewUser', () => {
       cy.setCookie('userName',response.body.username);
       cy.setCookie('expires',response.body.expires);
     })
+  });
 
 });
