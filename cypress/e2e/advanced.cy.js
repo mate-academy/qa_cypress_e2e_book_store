@@ -16,12 +16,12 @@ describe('Book Store app', () => {
     })
   });
 
-  it('Add book', () => { 
+  it.only('Add book', () => { 
     cy.fixture('fixtures').then((data) => {  
       bookStore.clickLeftSideBarWidgets();
       bookStore.clickButtonGoToStore();
       bookStore.searchBook(data.book);
-      bookStore.getBook();
+      cy.clickToGetBook(data.book);
       bookStore.clickLeftSideBarWidgets();
       bookStore.addBook();
 
@@ -32,9 +32,12 @@ describe('Book Store app', () => {
       bookStore.clickLeftSideBarBookStoreProfile()
 
       bookStore.checkAddedBookInProfile(data.book);
-   
-      bookStore.clickToDeleteBook();
+
+      bookStore.clickToDeleteBook();     
       bookStore.closeConfirmationPopUp();
+
+      bookStore.uncaughtException(data.messageBookAdded);
+      
     });
   });
 
@@ -44,9 +47,12 @@ describe('Book Store app', () => {
       bookStore.clickLeftSideBarWidgets(); 
       bookStore.clickButtonGoToStore();
       bookStore.searchBook(data.book);
-      bookStore.getBook(data.book);
+      cy.clickToGetBook(data.book)  
       bookStore.clickLeftSideBarWidgets();
       bookStore.addBook();
+
+      bookStore.uncaughtException(data.messageBookDeleted);
+
       bookStore.clickLeftSideBarWidgets()
       bookStore.clickLeftSideBarBookStore();
       bookStore.clickLeftSideBarBookStoreProfile();

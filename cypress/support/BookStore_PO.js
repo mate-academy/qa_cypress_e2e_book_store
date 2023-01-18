@@ -28,6 +28,13 @@ class bookStore {
     });
   };
 
+  uncaughtException(){
+    cy.on('window:alert', (str1) => {expect(str1).not.to.equal(message)
+      return false
+    });
+  };
+
+
   clickToDeleteBook() {
     cy.get(this.deleteBook).click()
   };
@@ -42,10 +49,6 @@ class bookStore {
 
   searchBook(book) {    
     cy.get(this.searchField).type(book).wait(500);
-  };
-  
-  getBook() {
-    cy.get(this.fieldOfBook).click()
   };
 
   clickLeftSideBarWidgets() {

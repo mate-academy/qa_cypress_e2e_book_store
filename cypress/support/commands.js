@@ -23,19 +23,7 @@
 //
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
-
-//const { generateInput } = require("../support/generation_input");
-
-//Cypress.Commands.add('registrationNewUser', () => {
-  //const user = generateInput();
-
-  //cy.visit('register')
-  //cy,get('#firstname').type()
-
-  //cy.request('POST', '/users', user)
-    //.then( response => ({ ...response.body.user, ...user}));
-
-//});
+/// <reference types='cypress' />
 
 Cypress.Commands.add('logInNewUser', () => {
   cy.fixture('fixtures').then((data) => {  
@@ -53,3 +41,8 @@ Cypress.Commands.add('logInNewUser', () => {
   });
 
 });
+
+Cypress.Commands.add('clickToGetBook', (nameOfBook) => {
+  cy.get('a').contains(nameOfBook).click()
+
+})
