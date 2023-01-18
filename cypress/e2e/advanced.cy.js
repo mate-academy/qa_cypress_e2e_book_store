@@ -16,7 +16,7 @@ describe('Book Store app', () => {
     })
   });
 
-  it.only('Add book', () => { 
+  it('Add book', () => { 
     cy.fixture('fixtures').then((data) => {  
       bookStore.clickLeftSideBarWidgets();
       bookStore.clickButtonGoToStore();
