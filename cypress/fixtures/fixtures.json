@@ -1,0 +1,8 @@
+{
+  "username":"TestCypress",
+  "password": "TestCypress123!",
+  "book":"Speaking JavaScript",
+  "messageBookAdded": "Book added to your collection.",
+  "messageBookDeleted": "Book deleted."
+  
+}
