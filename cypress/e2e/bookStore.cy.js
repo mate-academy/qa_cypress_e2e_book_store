@@ -1,7 +1,7 @@
 /// <reference types='cypress' />
 import Login from "../PageObjects/Login";
 import BookStore from "../PageObjects/BookStore";
-import Profile from "../PageObjects/ProfilePage";
+import Profile from "../PageObjects/Profile";
 describe('Book Store app', () => {
 
   it('should allow an existing user to login, add a book and delete a book', () => {
@@ -42,9 +42,9 @@ describe('Book Store app', () => {
    profile.navigate();
    profile.verifyJavaBook();
    profile.deleteBook();
- 
-  cy.wait(4000);
-  cy.get('#closeSmallModal-ok').click();
+   cy.wait(4000);
+   profile.verifyDelete()
+
   cy.on('window:alert', (str) => {
     expect(str).to.equal(`Book deleted.`)
     });
