@@ -1,52 +1,64 @@
 /// <reference types='cypress' />
-import Login from "../PageObjects/Login";
-import BookStore from "../PageObjects/BookStore";
-import Profile from "../PageObjects/Profile";
-describe('Book Store app', () => {
+import LoginPage from "../PageObjects/LoginPage";
+import BookStorePage from "../PageObjects/BookStorePage";
+import ProfilePage from "../PageObjects/ProfilePage";
 
-  it('should allow an existing user to login, add a book and delete a book', () => {
-    
+const username = "test_anna_s";
+const password = "Test123@";
+
+describe("Book Store app", () => {
+  before(() => {
     cy.viewport(1024, 768);
-    cy.visit('/login');
-  
-    const username = "test_anna_s";
-    const password = "Test123@";
-     
+    cy.visit("/");
+  });
 
-    const loginPage = new Login();
-    loginPage.setUserName(username);
-    loginPage.setPassword(password);
-    loginPage.clickSubmit() 
+  it.only("should allow an existing user to login", () => {
+    LoginPage.navigate();
+    LoginPage.typeUsername(username);
+    LoginPage.typePassword(password);
+    LoginPage.clickSubmit();
+  });
+
+  it("should allow an existing user to add a book", () => {
+    LoginPage.navigate();
+    LoginPage.typeUsername(username);
+    LoginPage.typePassword(password);
+    LoginPage.clickSubmit();
     cy.wait(4000);
-    cy.url().should('include', '/profile');
-  
-    
-
-    const bookStore = new BookStore();
-    bookStore.navigate();
-    bookStore.typeSearchBox();
-    bookStore.clickOnBook();
-    bookStore.verifyBook();
-    bookStore.clickOnWidget();
+    BookStorePage.navigate();
+    BookStorePage.typeSearchBox();
+    BookStorePage.clickOnBook();
+    BookStorePage.verifyBook();
+    BookStorePage.clickOnWidget();
     cy.wait(4000);
-    bookStore.addToCollection();
+    BookStorePage.addToCollection();
+    cy.wait(4000);
+    cy.on("window:alert", (str) => {
+      expect(str).to.equal(`Book added to your collection`);
+    });
+  });
 
-    cy.on('window:alert', (str) => {
-      expect(str).to.equal(`Book added to your collection`)
-  })
-  
-  cy.go('back')
-  cy.wait(4000)
-
-   const profile = new Profile();
-   profile.navigate();
-   profile.verifyJavaBook();
-   profile.deleteBook();
-   cy.wait(4000);
-   profile.verifyDelete()
-
-  cy.on('window:alert', (str) => {
-    expect(str).to.equal(`Book deleted.`)
+  it("should allow an existing user to delete a book", () => {
+    LoginPage.navigate();
+    LoginPage.typeUsername(username);
+    LoginPage.typePassword(password);
+    LoginPage.clickSubmit();
+    cy.wait(4000);
+    BookStorePage.navigate();
+    BookStorePage.typeSearchBox();
+    BookStorePage.clickOnBook();
+    BookStorePage.verifyBook();
+    BookStorePage.clickOnWidget();
+    cy.wait(4000);
+    BookStorePage.addToCollection();
+    cy.wait(4000);
+    ProfilePage.navigate();
+    ProfilePage.verifyJavaBook();
+    ProfilePage.deleteBook();
+    cy.wait(4000);
+    ProfilePage.verifyDelete();
+    cy.on("window:alert", (str) => {
+      expect(str).to.equal(`Book deleted.`);
     });
   });
 });
