@@ -36,7 +36,7 @@ describe('Book Store app', () => {
     cy.contains('a', 'Speaking JavaScript')
       .click();
     
-    cy.get('#description-wrapper > .col-md-9 > #userName-value')
+    cy.get('#description-wrapper')
       .should('contain', 'Like it or not, JavaScript is everywhere these days-from browser to server to mobile-and now you, too, need to learn the language or dive deeper than you have. This concise book guides you into and through JavaScript, written by a veteran programmer who o');
     
     cy.contains('button', 'Add To Your Collection')
@@ -53,7 +53,7 @@ describe('Book Store app', () => {
       .should('contain', 'Speaking JavaScript');
   });
 
-  it('should delete a book', () => {
+  it.only('should delete a book', () => {
     cy.login('k.stadnyk333', 'Test333!');
 
     cy.get('.rt-tr-group')
@@ -63,6 +63,9 @@ describe('Book Store app', () => {
     
     cy.contains('button', 'OK')
       .click();
+    
+    cy.get(".rt-noData")
+      .should('contain', 'No rows found')
   });
 });
 
