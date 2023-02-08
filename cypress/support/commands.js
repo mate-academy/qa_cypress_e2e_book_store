@@ -41,3 +41,9 @@ Cypress.Commands.add('login', (username, password) => {
     cy.setCookie('username', response.body.username);
   });
 })
+
+Cypress.Commands.add('checkAddBook', () => {
+  cy.on('window:alert', (str) => {
+    expect(str).to.equal('Book added to your collection.')
+  });
+})

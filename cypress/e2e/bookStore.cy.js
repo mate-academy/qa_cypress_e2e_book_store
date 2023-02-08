@@ -35,9 +35,11 @@ describe('Book Store app', () => {
 
     cy.contains('Add To Your Collection').click({force: true});
 
-    cy.on('window:alert', (str) => {
-      expect(str).to.equal(`Book added to your collection.`)
-    });
+    cy.checkAddBook();
+
+    cy.contains('#item-3', 'Profile').click();
+
+    cy.contains('a', 'Speaking JavaScript').should('be.visible')
   });
 
   it('should be able to delete added book from collection', () => {
@@ -54,7 +56,7 @@ describe('Book Store app', () => {
 
     cy.contains('#item-3', 'Profile').click();
 
-    cy.contains('a', 'Speaking JavaScript').should('be.visible')
+    // cy.contains('a', 'Speaking JavaScript').should('be.visible')
 
     cy.get('#delete-record-undefined').click();
 
