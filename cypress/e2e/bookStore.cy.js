@@ -56,8 +56,6 @@ describe('Book Store app', () => {
 
     cy.contains('#item-3', 'Profile').click();
 
-    // cy.contains('a', 'Speaking JavaScript').should('be.visible')
-
     cy.get('#delete-record-undefined').click();
 
     cy.get('#closeSmallModal-ok').click();
