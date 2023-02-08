@@ -23,3 +23,28 @@
 //
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
+
+const { generateUser } = require("./generate");
+
+Cypress.Commands.add('findById', (id) => {
+    cy.get(`#${id}`);
+})
+
+Cypress.Commands.add('registerNewUser', () => {
+    const user = generateUser();
+
+    cy.request('POST', '/Account/v1/User', user)
+        .then(response => ({...response.body, ...user}));
+})
+
+Cypress.Commands.add('checkAddPopUp', () => {
+    cy.on('window:alert', (str) => {
+        expect(str).to.equal(`Book added to your collection.`)
+    });
+})
+
+Cypress.Commands.add('checkDeletePopUp', () => {
+    cy.on('window:alert', (str) => {
+        expect(str).to.equal(`Book deleted.`)
+    });
+})
