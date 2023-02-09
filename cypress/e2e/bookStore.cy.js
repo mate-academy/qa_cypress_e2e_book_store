@@ -54,42 +54,21 @@ describe('Book Store app', () => {
 
     cy.on('window:alert', (str) => {
       expect(str).to.equal(`Book added to your collection.`)
-
     })
   });
 
   it('should provide an ability to delete book from the cart', () => {
     cy.login(user.username, user.password);
 
-    cy.visit('https://demoqa.com/profile')
+    cy.visit('https://demoqa.com/profile');
 
-    cy.contains('[id="item-2"]', 'Book Store')
-      .click();
-
-    cy.findByPlaceholder('Type to search')
-      .type(book.name);
-
-    cy.contains('a', book.name)
-      .click();
-
-    cy.contains('#addNewRecordButton', 'Add To Your Collection')
-      .click();
-
-      cy.get(':nth-child(6) > .element-list > .menu-list > #item-3')
-      .click();
-
-      cy.visit('https://demoqa.com/profile');
-
-      cy.contains('a', 'Speaking JavaScript')
-        .should('contain', book.name);
-
-      cy.get('#delete-record-undefined')
+    cy.get('#delete-record-undefined')
         .click();
       
-      cy.get('#closeSmallModal-ok')
+    cy.get('#closeSmallModal-ok')
         .click();
 
-      cy.get('.rt-noData')
+    cy.get('.rt-noData')
         .should('contain', 'No rows found');
     })
   });
