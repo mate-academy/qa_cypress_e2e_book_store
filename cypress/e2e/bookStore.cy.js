@@ -1,5 +1,5 @@
 /// <reference types='cypress' />
-/// <reference types="../support"/>
+// /// <reference types="../support"/>
 
 
 const user = {
@@ -20,9 +20,9 @@ describe('Book Store app', () => {
   });
 
   it('Should provide abbility to log in', () => {
-    cy.get('[placeholder="UserName"]')
+    cy.findByPlaceholder('UserName')
       .type(user.username);
-    cy.get('[placeholder="Password"]')
+    cy.findByPlaceholder('Password')
       .type(user.password);
 
     cy.get("#login")
@@ -39,13 +39,15 @@ describe('Book Store app', () => {
 
     cy.login(user.username, user.password);
 
-    cy.wait(1000);
+    cy.wait(500);
 
-    cy.contains('[id=item-2]', 'Book Store').click();
+    cy.contains('[id=item-2]', 'Book Store')
+    .click();
 
     cy.contains('#userName-value', user.username);
 
-    cy.findByPlaceholder('Type to search').type(book.name);
+    cy.findByPlaceholder('Type to search')
+      .type(book.name);
 
     cy.contains ('[role="row"]', book.name)
       .should('contain', book.author)
@@ -73,21 +75,17 @@ describe('Book Store app', () => {
 });
 
 it('Should provide an abbility to delete the book ', () => {
-    
-  cy.visit('/login');
 
-  cy.get('[placeholder="UserName"]')
-      .type(user.username);
+    cy.login(user.username, user.password);
 
-    cy.get('[placeholder="Password"]')
-      .type(user.password);
+    cy.wait(500);
 
-    cy.get("#login")
-      .click();
+    cy.visit('/profile');
 
-    cy.url().should('include', '/login');
+    cy.url().should('include', '/profile');
   
-    cy.get('#userName-value').should('have.text', 'Adam');
+    cy.get('#userName-value')
+      .should('have.text', 'Adam');
 
     cy.get('[id="delete-record-undefined"]')
       .click();
