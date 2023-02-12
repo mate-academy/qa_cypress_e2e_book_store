@@ -43,17 +43,3 @@ Cypress.Commands.add('login', (userName, password) => {
     cy.setCookie('expires', response.body.expires);
   });
 });
-
-Cypress.Commands.add('addBookToTheBasket', (userId, collectionOfIsbns) => {
-  cy.request({
-    url: 'https://demoqa.com/BookStore/v1/Books',
-    method: 'POST',
-    body: {
-      userId,
-      collectionOfIsbns,
-    },
-  }).then(response => {
-    cy.setCookie('collectionOfIsbns', response.body.collectionOfIsbns);
-    cy.setCookie('userId', response.body.userId);
-  });
-});
