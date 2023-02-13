@@ -27,15 +27,6 @@ Cypress.Commands.add('findByPlaceholder', (placeholder) => {
     cy.get(`[placeholder="${placeholder}"]`);
 });
 
-// Cypress.Commands.add('login', (username, password) => {
-//     cy.visit('/login')
-//     cy.findByPlaceholder('UserName')
-//         .type(username);
-//     cy.findByPlaceholder('Password')
-//         .type(password);
-//     cy.get('#login')
-//         .click;
-//   });
 Cypress.Commands.add('login', (username, password) => {
     cy.request({
         url: 'https://demoqa.com/Account/v1/Login',
