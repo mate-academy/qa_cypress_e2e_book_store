@@ -22,6 +22,7 @@ describe('Book Store app', () => {
     cy.findByPlaceholder('Password').type(user.password);
     cy.get('#login').click();
     cy.get('#userName-value').should('contain', user.username);
+    cy.url().should('contain', '/profile');
   });
 
 
