@@ -23,3 +23,21 @@
 //
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
+
+Cypress.Commands.add('login', (user) => {
+  cy.request('POST', '/Account/v1/Login', user)
+    .then(response => {
+      cy.setCookie('token', response.body.token);
+      cy.setCookie('expires', response.body.expires);
+      cy.setCookie('userName', response.body.username);
+      cy.setCookie('userID', response.body.userId);
+    });
+});
+
+Cypress.Commands.add('findByPlaceholder', (placeholder) => {
+  cy.get(`[placeholder="${placeholder}"]`);
+});
+
+Cypress.Commands.add('findById', (id) => {
+  cy.get(`[id="${id}"]`);
+});
