@@ -10,8 +10,14 @@
 //
 //
 // -- This is a parent command --
-// Cypress.Commands.add('login', (email, password) => { ... })
-//
+Cypress.Commands.add('login', (username, password) => { 
+    cy.request('POST', '/Account/v1/Login', {userName: username, password: password})
+      .then(responce => {
+        cy.setCookie('token', responce.body.token);
+        cy.setCookie('expires', responce.body.expires);
+        cy.setCookie('userID', responce.body.userId);
+    });
+ });
 //
 // -- This is a child command --
 // Cypress.Commands.add('drag', { prevSubject: 'element'}, (subject, options) => { ... })
