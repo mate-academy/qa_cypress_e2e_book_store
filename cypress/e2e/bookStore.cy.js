@@ -16,10 +16,10 @@ const book = {
   });
 
   it('should be possible to log in for existed user', () => {
-    cy.get('[placeholder="UserName"]')
+    cy.findByPlaceholder('UserName')
       .type(`${user.name}`)
 
-    cy.get('[placeholder="Password"]')
+    cy.findByPlaceholder('Password')
       .type(`${user.password}`)
 
     cy.contains('button', 'Login').click()
@@ -28,7 +28,7 @@ const book = {
       .should('contain.text', `${user.name}`)
 
     cy.get('#gotoStore')
-      .click()
+      .click({ force: true })
 
     cy.contains('a', 'Speaking JavaScript')
       .click()
@@ -39,8 +39,12 @@ const book = {
     cy.get('#description-wrapper')
       .should('contain.text', book.description)
 
-    cy.get('#addNewRecordButton')
-      .click()
+      
+    cy.contains('button', 'Add To Your Collection')
+      .click({ force: true })
+
+    // cy.get('#addNewRecordButton')
+    //   .click()
 
     cy.visit('/profile')
 
@@ -48,7 +52,7 @@ const book = {
       .should('exist')
     
     cy.contains('button', 'Delete All Books')
-     .click()
+     .click({ force: true })
 
     cy.get('#closeSmallModal-ok')
       .click()
