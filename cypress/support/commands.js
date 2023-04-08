@@ -53,10 +53,12 @@ Cypress.Commands.add('login', () => {
     body: {
       userName: 'adydyk',
       password: 'Qwer1234!'
-    },
-    failOnStatusCode: false // додаємо параметр failOnStatusCode: false
+    }
   }).then((response) => {
     expect(response.status).to.eq(200);
-    cy.setCookie('token', JSON.stringify(response.body.token));
+    cy.setCookie('token',response.body.token);
+    cy.setCookie('userID',response.body.userId);
+    cy.setCookie('userName',response.body.username);
+    cy.setCookie('expires',response.body.expires);
   });
 });
