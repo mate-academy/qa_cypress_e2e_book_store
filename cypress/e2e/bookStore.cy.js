@@ -2,7 +2,7 @@
 
 describe('Book Store app', () => {
 const user = {
-  name: 'max',
+  userName: 'max',
   password: 'Cy1@Password',
 }
 
@@ -15,9 +15,9 @@ const book = {
     cy.visit('/login')
   });
 
-  it('should be possible to log in for existed user', () => {
+  it.skip('should be possible to log in for existed user', () => {
     cy.findByPlaceholder('UserName')
-      .type(`${user.name}`)
+      .type(`${user.userName}`)
 
     cy.findByPlaceholder('Password')
       .type(`${user.password}`)
@@ -25,7 +25,7 @@ const book = {
     cy.contains('button', 'Login').click()
 
     cy.get('#userName-value')
-      .should('contain.text', `${user.name}`)
+      .should('contain.text', `${user.userName}`)
 
     cy.get('#gotoStore')
       .click({ force: true })
@@ -43,9 +43,6 @@ const book = {
     cy.contains('button', 'Add To Your Collection')
       .click({ force: true })
 
-    // cy.get('#addNewRecordButton')
-    //   .click()
-
     cy.visit('/profile')
 
     cy.contains('a', 'Speaking JavaScript')
@@ -54,10 +51,66 @@ const book = {
     cy.contains('button', 'Delete All Books')
      .click({ force: true })
 
+     cy.on('window:alert', (alarm) => {
+      expect(alarm).to.equal(`All Books deleted.`)
+      })
+
     cy.get('#closeSmallModal-ok')
       .click()
 
     cy.contains('a', 'Speaking JavaScript')
       .should('not.exist')
+  });
+
+  it('should be possible to add book to collection', () => {
+    cy.login(user);
+
+    cy.visit('/profile')
+
+    cy.get('#userName-value')
+      .should('contain.text', `${user.userName}`)
+
+      cy.get('#gotoStore')
+      .click({ force: true })
+
+    cy.contains('a', 'Speaking JavaScript')
+      .click()
+
+    cy.get('#title-wrapper')
+      .should('contain.text', book.title)
+
+    cy.get('#description-wrapper')
+      .should('contain.text', book.description)
+
+      
+    cy.contains('button', 'Add To Your Collection')
+      .click({ force: true })
+
+    cy.visit('/profile')
+
+    cy.contains('a', 'Speaking JavaScript')
+      .should('exist')
+  });
+
+  it('should be possible to delete book from collection', () => {
+    cy.login(user);
+
+    cy.visit('/profile')
+
+    cy.contains('a', 'Speaking JavaScript')
+      .should('exist')
+
+    cy.contains('button', 'Delete All Books')
+      .click({ force: true })
+ 
+    cy.on('window:alert', (alarm) => {
+       expect(alarm).to.equal(`All Books deleted.`)
+       })
+ 
+    cy.get('#closeSmallModal-ok')
+       .click()
+ 
+    cy.contains('a', 'Speaking JavaScript')
+       .should('not.exist')
   });
 });
