@@ -23,3 +23,42 @@
 //
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
+const {generateUser} = require('../support/generateUser');
+
+Cypress.Commands.add(`findByPlaceholder`, (placeholder) => {
+  cy.get(`[placeholder="${placeholder}"]`);
+});
+Cypress.Commands.add(`findById`, (id) => {
+    cy.get(`[id = ${id}]`);
+});
+
+Cypress.Commands.add('registerUser', () => {
+  const user = generateUser();
+
+  return cy.request('POST', 'https://demoqa.com/Account/v1/User', user)
+    .then((response) => {
+      return {
+        firstName: user.firstName,
+        lastName: user.lastName,
+        userName: user.userName,
+        password: user.password,
+      };
+    });
+});
+  
+Cypress.Commands.add('login', () => {
+  cy.request({
+    method: 'POST',
+    url: 'https://demoqa.com/Account/v1/Login',
+    body: {
+      userName: 'adydyk',
+      password: 'Qwer1234!'
+    }
+  }).then((response) => {
+    expect(response.status).to.eq(200);
+    cy.setCookie('token',response.body.token);
+    cy.setCookie('userID',response.body.userId);
+    cy.setCookie('userName',response.body.username);
+    cy.setCookie('expires',response.body.expires);
+  });
+});
