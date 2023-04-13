@@ -1,11 +1,7 @@
 /// <reference types='cypress' />
 
-// import { user } from '../support/testData';
 
 describe('Book Store app', () => {
-  // before(() => {
-    
-  // });
 
   it('login', () => {
     cy.login();
