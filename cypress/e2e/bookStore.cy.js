@@ -6,6 +6,7 @@ describe('Book Store app', () => {
   beforeEach(() => {
     cy.visit('/login');
     cy.login();
+    cy.visit('/profile')
   });
 
   it('should check if the user is logged in', () => {
