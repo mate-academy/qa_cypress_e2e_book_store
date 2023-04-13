@@ -23,3 +23,36 @@
 //
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
+
+Cypress.Commands.add('login', (username, password) => { 
+  cy.request({
+    method: 'POST',
+    url: 'https://demoqa.com/Account/v1/Login',
+    body: {
+      userName:"iziumova",
+      password:"Test_123!"
+    },
+  }).then((response) => {
+    cy.setCookie('token', response.body.token);
+    cy.setCookie('userName', response.body.username);
+    cy.setCookie('userID', response.body.userId);
+    cy.setCookie('expires', response.body.expires);
+  });
+
+  // Cypress.Commands.add('addBook', () => { 
+  //   cy.request({
+  //     method: 'POST',
+  //     url: 'https://demoqa.com/BookStore/v1/Books',
+  //     body: {
+  //       userId: "1d684dca-8bb7-4faa-bccb-218f8fcdb85b", 
+  //       collectionOfIsbns: [{isbn: "9781449365035"}]
+  //     },
+  //   }).then((response) => {
+  //     cy.setCookie('token', response.body.token);
+  //     cy.setCookie('userName', response.body.username);
+  //     cy.setCookie('userID', response.body.userId);
+  //     cy.setCookie('expires', response.body.expires);
+  //   });
+  
+  //   })
+})
