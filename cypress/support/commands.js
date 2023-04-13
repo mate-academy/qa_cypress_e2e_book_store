@@ -23,3 +23,20 @@
 //
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
+import {user} from '../support/testData';
+
+Cypress.Commands.add('signIn', () => {
+    cy.request({
+      method: 'POST',
+      url: '/Account/v1/Login',
+      body: {
+        userName: user.username,
+        password: user.password
+      },
+    }).then((response) => {
+      cy.setCookie('token', response.body.token);
+      cy.setCookie('userName', response.body.username);
+      cy.setCookie('userID', response.body.userId);
+      cy.setCookie('expires', response.body.expires);
+    })
+  })
