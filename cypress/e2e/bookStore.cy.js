@@ -2,7 +2,7 @@
 
 // const { should } = require("chai");
 // import { should } from 'chai';
-import { user } from '../support/testDate';
+import { user } from '../support/testData';
 
 describe('Book Store app', () => {
   before(() => {
