@@ -1,3 +1,22 @@
+Cypress.Commands.add('findByPlaceholder', (placeholder) => {
+    cy.get(`[placeholder="${placeholder}"]`)
+});
+
+Cypress.Commands.add('login', (username = 'qa_jan23', password = '12345Qwert!') => {
+    cy.request({
+        method: 'POST',
+        url: 'https://demoga.com/Account/v1/Login',
+        body: {
+          userName: username,
+          password: password
+        },
+    }).then((response) => {
+        cy.setCookie('token', response.body.token);
+        cy.setCookie('expires', response.body.expires);
+        cy.setCookie('userID', response.body.userId);
+        cy.setCookie('userName', response.body.username);
+      })
+})
 // ***********************************************
 // This example commands.js shows you how to
 // create various custom commands and overwrite
