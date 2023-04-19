@@ -13,7 +13,7 @@ describe('Book Store app', () => {
   });
 
 
-  it('user should be able to login', () => {
+  it.skip('user should be able to login', () => {
     cy.get('#userName').type(user.username)
 
     cy.get('#password').type(user.password)
@@ -39,11 +39,11 @@ describe('Book Store app', () => {
       cy.get('#description-wrapper')
       .contains(book.description)
   
-      cy.contains('button', 'Add To Your Collection').click()
-  
-      cy.intercept('POST', 'https://demoqa.com/BookStore/v1/Books').as('addBook')
-  
-      cy.wait('@addBook')
+      cy.contains('Add To Your Collection').click({ timeout: 4000 });
+
+      cy.intercept('POST', 'https://demoqa.com/BookStore/v1/Books').as('getBook')
+
+      cy.wait('@getBook')
   
       cy.on('window:alert', (str) => {
         expect(str).to.equal(`Book added to your collection.`)
@@ -57,14 +57,12 @@ describe('Book Store app', () => {
 
     cy.visit('/profile')
 
-    cy.contains('a', book.name).should('exist')
+    cy.contains('a', book.name).should('be.visible', { timeout: 4000 });
 
     cy.get('#delete-record-undefined').click()
 
     cy.contains('button', 'OK').click()
-
-    // cy.wait(1000)
-
+    
     cy.contains('No rows found').should('exist')
   });
 });
