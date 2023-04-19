@@ -9,7 +9,7 @@ describe('Book Store app', () => {
   });
 
   beforeEach(() => {
-    cy.viewport(1488, 1000)
+    cy.viewport(1200, 1000)
   });
 
 
@@ -27,24 +27,29 @@ describe('Book Store app', () => {
   });
 
   it('User should be able to add a book', () => {
-    cy.login()
+    cy.login().then(() => {
+      cy.visit('/profile')
 
-    cy.visit('/profile')
+      cy.get('#gotoStore').click()
+  
+      cy.get('#searchBox').type(book.name)
+  
+      cy.contains('a', book.name).click()
+  
+      cy.get('#description-wrapper')
+      .contains(book.description)
+  
+      cy.contains('button', 'Add To Your Collection').click()
+  
+      cy.intercept('POST', 'https://demoqa.com/BookStore/v1/Books').as('addBook')
+  
+      cy.wait('@addBook')
+  
+      cy.on('window:alert', (str) => {
+        expect(str).to.equal(`Book added to your collection.`)
+    })
+    })
 
-    cy.get('#gotoStore').click()
-
-    cy.get('#searchBox').type(book.name)
-
-    cy.contains('a', book.name).click()
-
-    cy.get('#description-wrapper')
-    .contains(book.description)
-
-    cy.contains('button', 'Add To Your Collection').click()
-
-    cy.on('window:alert', (str) => {
-      expect(str).to.equal(`Book already present in the your collection!`)
-  })
   });
 
   it('User should be able to delete a book', () => {
@@ -57,6 +62,8 @@ describe('Book Store app', () => {
     cy.get('#delete-record-undefined').click()
 
     cy.contains('button', 'OK').click()
+
+    // cy.wait(1000)
 
     cy.contains('No rows found').should('exist')
   });
