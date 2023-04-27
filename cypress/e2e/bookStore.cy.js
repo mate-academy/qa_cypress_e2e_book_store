@@ -8,10 +8,10 @@ describe('Book Store app', () => {
     cy.get('#password').type('Qwerty1!');
     cy.contains('.text-right button', 'Login').click();
     cy.get('#userName-value').should('contain.text', 'Test21');
-    cy.assertPageUrl('/profile');
+    cy.assertPageUrl('/profile', 'User should be redirected to the profile page after login');
   });
 
-  it('Add book', () => {
+  it('Search for a book and add it to the collection', () => {
     cy.visit('/login');
     cy.get('#userName').type('test21');
     cy.get('#password').type('Qwerty1!');

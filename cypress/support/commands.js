@@ -32,3 +32,4 @@ Cypress.Commands.add('assertPageUrl', (url) => {
     cy.url()
         .should('include', Cypress.config().baseUrl + url)
   });
+  
