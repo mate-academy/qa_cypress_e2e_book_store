@@ -1,14 +1,16 @@
 /// <reference types='cypress' />
 
 describe('Book Store app', () => {
+  const bookName = 'Speaking JavaScript';
+
   beforeEach(() => {
-    cy.visit('https://demoqa.com/login')
   });
 
-  it('', () => {
+  it('should login user with existing creds', () => {
     const userName = 'TesterUser';
     const password = 'dsaEWQ321!';
-    const bookName = 'Speaking JavaScript'
+
+    cy.visit('https://demoqa.com/login')
 
     cy.get('#userName')
       .type(userName);
@@ -24,6 +26,12 @@ describe('Book Store app', () => {
     
     cy.url()
       .should('eq', 'https://demoqa.com/profile');
+  });
+
+  it('should add a book to the profile', () => {
+
+    cy.login();
+    cy.visit('https://demoqa.com/profile');
 
     cy.contains('#item-2', 'Book Store')
       .click();
@@ -44,8 +52,13 @@ describe('Book Store app', () => {
         expect(str).to.equal(`Book added to your collection.`)
     });
 
-    cy.contains('#item-3', 'Profile')
-      .click();
+  });
+
+  it('should delete a book from the profile', () => {
+  
+    cy.login();
+
+    cy.visit('https://demoqa.com/profile');
 
     cy.contains('.ReactTable', bookName)
       .should('exist');
