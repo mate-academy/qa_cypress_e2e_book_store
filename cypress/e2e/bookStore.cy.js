@@ -22,12 +22,16 @@ describe('Book Store app', () => {
   it('should provide an ability to login', () => {
   cy.get('#userName')
   .type(testData.user.username);
+
   cy.get('#password')
   .type(testData.user.password);  
+
   cy.get('#login')
   .click();
+
   cy.get('#userName-value')
   .should('contain', testData.user.username);
+  
   cy.url()
   .should('include', '/profile');
   });
