@@ -2,67 +2,39 @@
 
 describe('Book Store app', () => {
   before(() => {
-  });
-
-  describe('Login', () => {
-    it('Log in with valid credentials', () => {
-      cy.visit('https://demoqa.com/login');
-      cy.get('#userName').type('koko');
-      cy.get('#password').type('Koko123*');
-      cy.get('#login').click({ force: true });
-       
-    });
-  });
-   describe('Navigate to Book store', () => {
-    it('Navigate to Book store', () => {
-      cy.visit('https://demoqa.com/books');
-  
-      cy.url().should('eq', 'https://demoqa.com/books');
-    });
-  });
-  
-    describe('Search for a book', () => {
-    it('Enter text in the search field', () => {
-      cy.visit('https://demoqa.com/books');
-
-      cy.get('#searchBox').type('Speaking JavaScript');
-      cy.contains('.mr-2', 'Speaking JavaScript').click();
-            
-    });
-  });
-});
- 
-    describe('Add book to collection', () => {
-    it('Click on [Add To Your Collection]', () => {
-     
-    cy.on('window:alert', (str) => {
-    expect(str).to.equal(`Book added to your collection.`)
-})
-    });
-  });
-  describe('Go to profile page', () => {
-  it('Navigate to profile page', () => {
-    cy.visit('https://demoqa.com/profile');
-
-    cy.url().should('eq', 'https://demoqa.com/profile');
-
-  });
-});
-describe('Assert book in shopping list', () => {
-  it('Assert "Speaking JavaScript" in shopping list', () => {
-  
-    cy.visit('https://demoqa.com/profile');
-
-  });
-});
-
-describe('Delete book from shopping list', () => {
-  it('Delete "Speaking JavaScript" from shopping list', () => {
-    cy.visit('https://demoqa.com/profile');
-
-    cy.on('window:alert', (str) => {
-    expect(str).to.equal(`Delete All Books`)
     
-     });
+  });
+
+it('Log in with valid credentials', () => {
+    cy.login('koko', 'Koko123*')
+    cy.visit('https://demoqa.com/login')
+    cy.contains('#item-2', 'Book Store').click();
+    cy.get('#searchBox').type('Speaking JavaScript');
+    cy.contains('.mr-2', 'Speaking JavaScript').click();
+    cy.contains('#addNewRecordButton', 'Add To Your Collection')
+      .click();
+    cy.on('window:alert', (str) => {
+        expect(str).to.equal(testData.alert.bookAdded);
+      });
+    cy.on('window:alert', (str) => {
+        expect(str).to.equal(`Book added to your collection.`)
+    cy.visit('https://demoqa.com/profile');
+    cy.contains('.ReactTable', 'Speaking JavaScript')
+        
+    })
+
+it('user should be able to delete book from shopping list', () => {
+    cy.login(testData.user.username, testData.user.password);
+    cy.contains('#item-3', 'Profile').click();
+    cy.contains('[role="row"]', testData.book.title)
+        .find('[title="Delete"]')
+        .click();
+    cy.get('#closeSmallModal-ok').click();
+    cy.on('window:alert', (str) => {
+        expect(str).to.equal(testData.alert.bookDeleted);
+      });
+    });
+  });
 });
-});
+
+
