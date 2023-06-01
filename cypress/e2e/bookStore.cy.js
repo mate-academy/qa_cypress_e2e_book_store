@@ -31,7 +31,7 @@ describe('Book Store app', () => {
       .should('include', '/profile');
   });
 
-  it('should provide an ability to search for a book', () => {
+  it('should allow to search a book', () => {
     cy.login(testData.user.username, testData.user.password);
 
     cy.visit('https://demoqa.com/profile');
@@ -52,7 +52,7 @@ describe('Book Store app', () => {
       .click();
   });
 
-  it('should provide an ability to delete a book', () => {
+  it('should allow to delete a book', () => {
     cy.login(testData.user.username, testData.user.password);
 
     cy.visit('https://demoqa.com/profile');
