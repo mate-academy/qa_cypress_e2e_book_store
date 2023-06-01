@@ -1,8 +1,11 @@
-const { defineConfig } = require('cypress');
+const { defineConfig } = require("cypress");
+const faker = require("faker");
 
 module.exports = defineConfig({
   e2e: {
-    setupNodeEvents(on, config) {
-    },
+    baseUrl: "https://demoqa.com",
+    viewportHeight: 1080,
+    viewportWidth: 1920,
+    setupNodeEvents(on, config) {},
   },
 });
