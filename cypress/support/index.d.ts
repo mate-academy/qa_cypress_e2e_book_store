@@ -6,3 +6,4 @@ declare namespace Cypress {
       login(username: string, password: string): Chainable<any>;
     }
   }
+  
