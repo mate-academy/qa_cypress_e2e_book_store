@@ -53,6 +53,10 @@ describe('Book Store app', () => {
       .click();
 
     cy.get('#closeSmallModal-ok')
-        .click();
+      .click();
     });
+
+    cy.on('window:alert', (str) => {
+      expect(str).to.equal(`Book deleted.`);
+  });
   });
