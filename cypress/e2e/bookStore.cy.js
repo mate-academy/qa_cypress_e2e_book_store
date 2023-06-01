@@ -30,7 +30,7 @@ describe('Book Store app', () => {
     cy.contains('#item-2', 'Book Store').click();
     cy.get('#searchBox').type(bookName);
     cy.contains('a', bookName).click();
-    cy.contains('.form-label', 'Like it or not, JavaScript is everywhere these days-from browser').should('exist');
+    cy.get('#title-wrapper').should('contain', bookName);
     cy.contains('button', 'Add To Your Collection').click();
 
     cy.on('window:alert', (str) => {
