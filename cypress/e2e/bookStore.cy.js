@@ -7,8 +7,8 @@ describe('Book Store app', () => {
   });
 
   it('should login user with existing creds', () => {
-    const userName = 'TesterUser';
-    const password = 'dsaEWQ321!';
+    const userName = 'VKtestQA';
+    const password = 'StarWars1234!';
 
     cy.visit('https://demoqa.com/login')
 
@@ -28,7 +28,7 @@ describe('Book Store app', () => {
       .should('eq', 'https://demoqa.com/profile');
   });
 
-  it('should add a book to the profile', () => {
+  it('must add a book to the profile', () => {
 
     cy.login();
     cy.visit('https://demoqa.com/profile');
@@ -54,7 +54,7 @@ describe('Book Store app', () => {
 
   });
 
-  it('should delete a book from the profile', () => {
+  it('must delete a book from the profile', () => {
   
     cy.login();
 
