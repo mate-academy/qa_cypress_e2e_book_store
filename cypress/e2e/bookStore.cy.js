@@ -4,21 +4,22 @@ describe('Book Store app', () => {
     const bookName = 'Speaking JavaScript';
     const userName = 'OlehHoryk';
     const password = 'OlehHoryk@8';
+    const dataText = 'Like it or not, JavaScript is everywhere these days-from browser to server to mobile-and now you, too, need to learn the language or dive deeper than you have.';
   
     it('should login user with existing creds', () => {
     cy.visit('https://demoqa.com/login');
   
     cy.get('#userName')
-    .type(userName);
+      .type(userName);
     cy.get('#password')
-    .type(password);
+      .type(password);
     cy.contains('button', 'Login')
-    .click();
+      .click();
   
     cy.get('#userName-value')
-    .should('contain', userName);
+      .should('contain', userName);
     cy.url()
-    .should('eq', 'https://demoqa.com/profile');
+      .should('eq', 'https://demoqa.com/profile');
     });
   
     it('should add a book to the profile', () => {
@@ -26,16 +27,17 @@ describe('Book Store app', () => {
     cy.visit('https://demoqa.com/profile');
   
     cy.contains('#item-2', 'Book Store')
-    .click();
+      .click();
     cy.get('#searchBox')
-    .type(bookName);
+      .type(bookName);
     cy.contains('a', bookName)
-    .click();
+      .click();
   
-    cy.contains('.form-label', 'Like it or not, JavaScript is everywhere these days-from browser to server to mobile-and now you, too, need to learn the language or dive deeper than you have.').should('exist');
+    cy.contains('.form-label', dataText)
+      .should('exist');
   
     cy.contains('button', 'Add To Your Collection')
-    .click();
+      .click();
   
     cy.on('window:alert', (str) => {
     expect(str).to.equal(`Book added to your collection.`);
@@ -47,11 +49,12 @@ describe('Book Store app', () => {
     cy.visit('https://demoqa.com/profile');
   
     cy.contains('.ReactTable', bookName)
-    .should('exist');
+      .should('exist');
     cy.get('#delete-record-undefined')
-    .click();
+      .click();
     cy.get('#closeSmallModal-ok')
-    .click();
+      .click();
     });
   });
+  
   
