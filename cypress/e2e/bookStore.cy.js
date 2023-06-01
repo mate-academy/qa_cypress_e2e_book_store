@@ -57,6 +57,7 @@ describe('Book Store app', () => {
 
   it('should provide an ability to delete a book from cart', () => {
     cy.login(testData.user.username, testData.user.password);
+    cy.visit('/profile');
     cy.contains('#item-3', 'Profile').click();
     cy.contains('[role="row"]', testData.book.title)
       .find('[title="Delete"]')
