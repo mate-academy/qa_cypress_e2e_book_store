@@ -34,7 +34,7 @@ describe('Book Store app', () => {
       .should('include', '/profile');
   });
 
-  it('should provide an ability to searchfor the bookand add to cart', () => {
+  it('should provide an ability to search for the book and add to cart', () => {
     cy.login(testData.user.username, testData.user.password);
     cy.contains('#item-2', 'Book Store')
       .click();
