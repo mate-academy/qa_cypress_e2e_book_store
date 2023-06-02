@@ -51,7 +51,7 @@ describe('Book Store app', () => {
     cy.contains('#addNewRecordButton', 'Add To Your Collection')
       .click();
     cy.on('window:alert', (str) => {
-      expect(str).to.equal(testData.alerts.bookAdded);
+      expect(str).to.equal(testData.alerts.bookAdded)
     })
   });
 
@@ -68,8 +68,8 @@ describe('Book Store app', () => {
     cy.get('#closeSmallModal-ok')
       .click();
     cy.on('window:alert', (str) => {
-      expect(str).to.equal(testData.alerts.bookDeleted);
-    });
+      expect(str).to.equal(testData.alerts.bookDeleted)
+    })
   });
 });
 
