@@ -3,14 +3,13 @@
 describe('Book Store app', () => {
   const bookName = 'Speaking JavaScript';
 
-  beforeEach(() => {
+  beforeEach (() => {
+    cy.visit('/login');
   });
 
   it('should login user with existing creds', () => {
     const userName = 'annalymorenko';
     const password = 'Password12!';
-
-    cy.visit('https://demoqa.com/login');
 
     cy.get('#userName')
       .type(userName);
@@ -30,7 +29,6 @@ describe('Book Store app', () => {
 
   it('should add a book to the profile', () => {
     cy.login();
-    cy.visit('https://demoqa.com/profile');
 
     cy.contains('#item-2', 'Book Store')
       .click();
@@ -55,15 +53,18 @@ describe('Book Store app', () => {
   it('should delete a book from the profile', () => {
     cy.login();
 
-    cy.visit('https://demoqa.com/profile');
+    cy.contains('#item-3', 'Profile')
+      .click();
 
-    cy.contains('.ReactTable', bookName)
-      .should('exist');
-
-    cy.get('#delete-record-undefined')
+    cy.contains('[role="row"]', bookName)
+      .find('[title="Delete"]')
       .click();
 
     cy.get('#closeSmallModal-ok')
       .click();
+
+    cy.on('window:alert', (str) => {
+      expect(str).to.equal('Book deleted.');
+    });
   });
 });
