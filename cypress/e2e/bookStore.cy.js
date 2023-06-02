@@ -5,7 +5,7 @@ describe('Book Store app', () => {
     cy.visit('/');
   });
 
-  it('Login into account', () => {
+  it('User flow in BookStore', () => {
 
     cy.get('#userName')
     .type('DragonbornDovakin');
