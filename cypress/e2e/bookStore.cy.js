@@ -1,9 +1,7 @@
 /// <reference types='cypress' />
 
 describe('Book Store app', () => {
-  beforeEach(() => {
-  });
-
+  
   const username = 'TetserUsername';
   const password = 'Password1@';
   const book = 'Speaking JavaScript';
@@ -14,19 +12,19 @@ describe('Book Store app', () => {
     cy.visit('/')
     
     cy.findById('userName')
-    .type(username);
+      .type(username);
 
     cy.findById('password')
-    .type(password);
+      .type(password);
 
     cy.findById('login')
-    .click();
+      .click();
 
     cy.url()
-    .should('eq', 'https://demoqa.com/profile');
+      .should('eq', 'https://demoqa.com/profile');
 
     cy.get('#userName-value')
-    .should('contain.text', username);
+      .should('contain.text', username);
   });
 
   it('should allow to add book', () => {
@@ -35,26 +33,26 @@ describe('Book Store app', () => {
     cy.visit('https://demoqa.com/profile');
 
     cy.findById('gotoStore')
-    .click();
+      .click();
 
     cy.url()
-    .should('eq', 'https://demoqa.com/books')
+      .should('eq', 'https://demoqa.com/books')
 
     cy.findById('searchBox')
-    .type(book);
+      .type(book);
 
     cy.contains(book)
-    .click();
+      .click();
 
     cy.contains('#userName-value', bookDescription)
-    .should('exist');
+      .should('exist');
 
     cy.contains('button', 'Add To Your Collection')
-    .click();
+      .click();
 
     cy.on('window:alert', (str) => {
       expect(str).to.equal(`Book added to your collection.`)
-  });
+    });
   });
 
   it('should allow to delete book', () => {
@@ -63,12 +61,12 @@ describe('Book Store app', () => {
     cy.visit('https://demoqa.com/profile');
 
     cy.contains('.ReactTable', book)
-    .should('exist');
+      .should('exist');
 
     cy.findById('delete-record-undefined')
-    .click();
+      .click();
 
     cy.findById('closeSmallModal-ok')
-    .click();
+      .click();
   });
 });
