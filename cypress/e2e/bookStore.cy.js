@@ -10,10 +10,10 @@ describe('Book Store app', () => {
   };
 
   before(() => {
-    cy.visit('/login');
   });
 
   it('should provide an ability to login', () => {
+    cy.visit('/login');
     cy.get('#userName')
       .type(testData.user.username);
     cy.get('#password')
@@ -28,6 +28,7 @@ describe('Book Store app', () => {
 
   it('should provide an ability to add a book to cart', () => {
     cy.login(testData.user.username, testData.user.password);
+    cy.visit('/books');
 
     cy.contains('#item-2', 'Book Store')
       .click();
@@ -46,6 +47,7 @@ describe('Book Store app', () => {
 
   it('should provide an ability to delete a book from cart', () => {
     cy.login(testData.user.username, testData.user.password);
+    cy.visit('/profile');
 
     cy.contains('#item-3', 'Profile')
       .click();
