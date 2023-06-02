@@ -25,32 +25,33 @@ describe('Book Store app', () => {
 
   it('Should provide an ability to log in', () => {
     cy.get('#userName')
-    .type(testData.user.username);
+      .type(testData.user.username);
     cy.get('#password')
-    .type(testData.user.password);
+      .type(testData.user.password);
     cy.get('#login')
-    .click();
+      .click();
     cy.get('#userName-value')
-    .should('contain', testData.user.username);
+      .should('contain', testData.user.username);
     cy.url()
-    .should('include', '/profile');
+      .should('include', '/profile');
   });
 
   it('Should provide an ability to search for the book and add to the collection', () => {
     cy.login(testData.user.username, testData.user.password);
+    
     cy.contains('#item-2', 'Book Store')
-    .click();
+      .click();
     cy.get('[placeholder="Type to search"]')
-    .type(testData.book.name);
+      .type(testData.book.name);
     cy.contains('[role="row"]', testData.book.name)
-    .should('contain', testData.book.author)
-    .and('contain', testData.book.publisher);
+      .should('contain', testData.book.author)
+      .and('contain', testData.book.publisher);
     cy.contains('a', testData.book.name)
-    .click();
+      .click();
     cy.get('#description-wrapper')
-    .should('contain', testData.book.description);
+      .should('contain', testData.book.description);
     cy.contains('#addNewRecordButton', 'Add To Your Collection')
-    .click();
+      .click();
     cy.on('window:alert', (alert) => (
       expect(alert).to.eq(testData.alerts.bookAdded)
     ));
@@ -58,13 +59,14 @@ describe('Book Store app', () => {
 
   it('Should provide an ability to search for the book and add to the collection', () => {
     cy.login(testData.user.username, testData.user.password);
+    
     cy.contains('#item-3', 'Profile')
-    .click();
+      .click();
     cy.contains('[role="row"]', testData.book.name)
-    .find('[title="Delete"]')
-    .click();
+      .find('[title="Delete"]')
+      .click();
     cy.get('#closeSmallModal-ok')
-    .click();
+      .click();
     cy.on('window:alert', (alert) => (
       expect(alert).to.eq(testData.alerts.bookDeleted)
     ));
