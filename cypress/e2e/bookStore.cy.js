@@ -4,13 +4,10 @@ describe('Book Store App', () => {
   before(() => {
     cy.viewport(1920, 1080);
     cy.visit('https://demoqa.com/login');
-  });
-
-  beforeEach(() => {
     cy.reload();
   });
 
-  it('Login', () => {
+  it('Should login and verify username', () => {
     cy.get('#userName').type('John777');
     cy.get('#password').type('Me771835*');
     cy.get('#login').click();
