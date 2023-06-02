@@ -12,7 +12,7 @@
 // -- This is a parent command --
 Cypress.Commands.add('login', (username, password) => { 
   cy.request({
-    method: 'Post',
+    method: 'POST',
     url: 'https://demoqa.com/Account/v1/Login',
     body: {
       userName: username,

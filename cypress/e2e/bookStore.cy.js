@@ -1,7 +1,7 @@
 /// <reference types='cypress' />
 
 describe('Book Store app', () => {
-  before(() => {
+  beforeEach(() => {
   cy.visit ('/login');
   });
 
@@ -23,11 +23,6 @@ describe('Book Store app', () => {
       .should('contain', user.username);
     cy.url()
       .should('include', 'https://demoqa.com/profile');
-  });
-
-  it.only('User is able to search book and add to the cart', () => {
-    cy.visit ('/login');
-    cy.login(user.username, user.password);
     cy.contains('#item-2', 'Book Store')
       .click();
     cy.get('#searchBox')
@@ -38,13 +33,12 @@ describe('Book Store app', () => {
       .should('contain', bookDesc);
     cy.contains('#addNewRecordButton','Add To Your Collection')
       .click();
+      cy.wait(500);
     cy.on('window:alert', (alert) => {
-      expect(alert).to.eq('Book added to your collection.');
+      expect(alert).to.eq('Book added to your collection.');      
+    });
   });
-});
-  it('User is able to search book and add to the cart', () => {
-    cy.visit ('/login');
-    // cy.login(user.username, user.password);
+  it('User is able to delete a book from the cart', () => {
     cy.get('#userName')
       .type(user.username);
     cy.get('#password')
@@ -61,6 +55,6 @@ describe('Book Store app', () => {
       .click();
     cy.on('window:alert', (alert) => {
       expect(alert).to.eq('Book deleted.');
-});
-});
+    });
+    });
 });
