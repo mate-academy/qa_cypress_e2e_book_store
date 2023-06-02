@@ -10,7 +10,21 @@
 //
 //
 // -- This is a parent command --
-// Cypress.Commands.add('login', (email, password) => { ... })
+Cypress.Commands.add('login', (username, password) => { 
+  cy.request({
+    method: 'POST',
+    url: 'https://demoqa.com/Account/v1/Login',
+    body: {
+      userName: username,
+      password
+    }
+  }).then((response) => {
+    cy.setCookie('token', response.body.token);
+    cy.setCookie('userId', response.body.userId);
+    cy.setCookie('expires', response.body.expires);
+    cy.setCookie('username', response.body.username);
+  })
+ });
 //
 //
 // -- This is a child command --
