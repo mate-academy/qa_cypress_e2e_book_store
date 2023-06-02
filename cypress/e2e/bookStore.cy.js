@@ -21,7 +21,7 @@ it('Log in with valid credentials', () => {
     cy.visit('https://demoqa.com/profile');
     cy.contains('.ReactTable', 'Speaking JavaScript')
         
-    })
+    });
 
 it('user should be able to delete book from shopping list', () => {
     cy.login(testData.user.username, testData.user.password);
