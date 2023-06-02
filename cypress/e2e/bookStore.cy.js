@@ -3,8 +3,8 @@
 describe('Book Store app', () => {
   const testData = {
     user: {
-      username: 'Qatestss',
-      password: 'Qaqa12345!'
+      username: 'Otest1',
+      password: 'Qwerty12345!'
     },
     book: {
       name: 'Speaking JavaScript',
