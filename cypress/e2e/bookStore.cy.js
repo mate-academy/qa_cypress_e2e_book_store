@@ -8,6 +8,7 @@ describe("Book Store app", () => {
     author: "Axel Rauschmayer",
     publisher: "O'Reilly Media",
     title: "Speaking JavaScript",
+    description: "Like it or not, JavaScript is everywhere these days-from browser to server to mobile-and now you, too, need to learn the language or dive deeper than you have. This concise book guides you into and through JavaScript, written by a veteran programmer who ",
     addAlert: "Book added to your collection",
     deleteAlert: "Book deleted.",
   };
@@ -36,7 +37,7 @@ describe("Book Store app", () => {
   it("should find the book and add to the collection", () => {
     cy.login(testData.username, testData.password);
 
-    cy.visit("https://demoqa.com/profile");
+    cy.visit("/profile");
 
     cy.contains(".btn", "Book Store")
       .click();
@@ -56,8 +57,7 @@ describe("Book Store app", () => {
 
     cy.findId("description-wrapper")
       .should(
-        "contain",
-        "Like it or not, JavaScript is everywhere these days-from browser to server to mobile-and now you, too, need to learn the language or dive deeper than you have. This concise book guides you into and through JavaScript, written by a veteran programmer who "
+        "contain", testData.description
       );
 
     cy.contains("button", "Add To Your Collection")
@@ -71,7 +71,7 @@ describe("Book Store app", () => {
   it("should delete book from collection", () => {
     cy.login(testData.username, testData.password);
 
-    cy.visit("https://demoqa.com/profile");
+    cy.visit("/profile");
 
     cy.findId("delete-record-undefined")
       .click();
