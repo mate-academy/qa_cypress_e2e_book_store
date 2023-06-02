@@ -32,26 +32,26 @@ describe('Book Store app', () => {
     cy.get('#userName-value')
       .should('contain', testData.user.username);
     cy.url()
-    .should('include', '/profile');
+      .should('include', '/profile');
   });
 
   it('should provide an ability to search a book and add it to the cart', () => {
     cy.login(testData.user.username, testData.user.password);
     cy.contains('#item-2', 'Book Store')
-    .click();
+      .click();
     cy.get('#searchBox')
-      .type(testData.book.name)
+      .type(testData.book.name);
     cy.contains('[role="row"]', testData.book.name)
       .should('contain', testData.book.author)
       .and('contain', testData.book.publisher);
     cy.contains('[class="action-buttons"]', testData.book.name)
       .click();
     cy.get('#description-wrapper')
-      .should('contain', testData.book.description)
+      .should('contain', testData.book.description);
     cy.contains('#addNewRecordButton', 'Add To Your Collection')
       .click();
     cy.on('window:alert', (str) => {
-        expect(str).to.equal(testData.alerts.bookAdded);
+      expect(str).to.equal(testData.alerts.bookAdded);
     })
   });
 
@@ -69,6 +69,7 @@ describe('Book Store app', () => {
       .click();
     cy.on('window:alert', (str) => {
       expect(str).to.equal(testData.alerts.bookDeleted);
-    })
+    });
   });
 });
+
