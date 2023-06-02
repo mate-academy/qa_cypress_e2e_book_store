@@ -36,5 +36,3 @@ it('user should be able to delete book from shopping list', () => {
     });
   });
 });
-
-
