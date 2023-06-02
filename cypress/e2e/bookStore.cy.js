@@ -3,9 +3,6 @@
 describe('Book Store app', () => {
   const bookName = 'Speaking JavaScript';
 
-  beforeEach(() => {
-  });
-
   it('should login user with existing creds', () => {
     const userName = 'petrykstanislav';
     const password = 'Pa$$word1!';
