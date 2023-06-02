@@ -12,8 +12,11 @@ describe('Book Store app', () => {
     }
   }
 
+  beforeEach (() => {
+    cy.visit('/login');
+  });
+
   it('should provide an ability to login', () => {
-    cy.visit('https://demoqa.com/login');
     cy.get('#userName')
       .type(testData.user.username);
     cy.get('[placeholder="Password"]')
@@ -28,7 +31,6 @@ describe('Book Store app', () => {
 
   it('should provide an ability to search for a book', () => {
     cy.login(testData.user.username, testData.user.password);
-    cy.visit('https://demoqa.com/profile');
     cy.contains('#item-2', 'Book Store')
       .click();
     cy.get('#searchBox')
@@ -43,7 +45,6 @@ describe('Book Store app', () => {
 
   it('should provide an ability to delete a book', () => {
     cy.login(testData.user.username, testData.user.password);
-    cy.visit('https://demoqa.com/profile');
     cy.contains('#item-3', 'Profile')
       .click();
     cy.contains('[role="row"]', testData.book.name)
@@ -51,5 +52,8 @@ describe('Book Store app', () => {
       .click();
     cy.get('#closeSmallModal-ok')
       .click();
+    cy.on('window:alert', (str) => {
+      expect(str).to.equal('Book deleted.');
+    })
   });
 });
