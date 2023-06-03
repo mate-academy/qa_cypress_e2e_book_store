@@ -25,14 +25,15 @@
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
 
 Cypress.Commands.add('login', () => {
-    const userName = 'OlehHoryk';
-    const password = 'OlehHoryk@8';
+  const userName = 'OlehHoryk';
+  const password = 'OlehHoryk@8';
 cy.request('POST', 'https://demoqa.com/Account/v1/Login', {
-    userName: userName,
-    password: password,
-}).then(response => {
-    cy.setCookie('token', response.body.token);
-    cy.setCookie('userID', response.body.userId);
-    cy.setCookie('expires', response.body.expires);
-});
+  userName: userName,
+  password: password,
+  })
+  .then(response => {
+  cy.setCookie('token', response.body.token);
+  cy.setCookie('userID', response.body.userId);
+  cy.setCookie('expires', response.body.expires);
+  });
 });
