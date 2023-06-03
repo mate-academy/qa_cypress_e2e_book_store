@@ -59,12 +59,12 @@ describe('Book Store app', () => {
   it('should provide an ability to delete a book from the card', () => {
     cy.login(testData.user.username, testData.user.password)
     cy.contains('#item-3', 'Profile')
-    .click();
+      .click();
     cy.contains('[role="row"]', testData.book.name)
-    .find('[title="Delete"]')
-    .click();
+      .find('[title="Delete"]')
+      .click();
     cy.get('#closeSmallModal-ok')
-    .click();
+      .click();
     cy.on('window:alert', (alert) => {
       expect(alert).to.eq(testData.alerts.bookDeleted);
     });
