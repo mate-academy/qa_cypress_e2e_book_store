@@ -23,7 +23,11 @@ describe('Book Store app', () => {
 
 
 it('should add a book to the profile', () => {
-
+  const formLabel = `Like it or not, JavaScript is everywhere these days - 
+  from browser to server to mobile - 
+  and now you, too, need to learn the language or dive deeper than you have. 
+  This concise book guides you into and through JavaScript, 
+  written by a veteran programmer who o`;
   cy.login();
   cy.visit('https://demoqa.com/profile');
 
@@ -36,7 +40,7 @@ it('should add a book to the profile', () => {
   cy.contains('a', bookName)
     .click();
 
-  cy.contains('.form-label', 'Like it or not, JavaScript is everywhere these days-from browser to server to mobile-and now you, too, need to learn the language or dive deeper than you have. This concise book guides you into and through JavaScript, written by a veteran programmer who o')
+  cy.contains('.form-label', formLabel)
     .should('exist');
 
   cy.contains('button', 'Add To Your Collection')
@@ -45,7 +49,7 @@ it('should add a book to the profile', () => {
   cy.on('window:alert', (str) => {
       expect(str).to.equal(`Book added to your collection.`)
   });
-
+});
   it('should delete a book from the profile', () => {
 
     cy.login();
@@ -61,9 +65,4 @@ it('should add a book to the profile', () => {
     cy.get('#closeSmallModal-ok')
       .click();
   });
-
-  });
-
-  });
-
-
+});
