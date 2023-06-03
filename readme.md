@@ -1,17 +1,18 @@
-# Cypress: Book Store
+# Cypress: New Article form
 
 ## Workflow
 
 1. Fork the repo.
 1. Clone **your** forked repository.
+1. Run the command `npm i`.
 1. Create a new branch `git checkout -b testing`.
-1. Resolve tasks in the `cypress`/`e2e`/`bookStore.cy.js`.
+1. Resolve tasks in the `cypress`/`e2e`/`createArticle.cy.js`.
 1. Create a pull request.
 1. Do not forget to click on `Re-request review` if you submit the homework after previous review.
 
 ## Task
 
-App for testing: `https://demoqa.com/login`
+App for testing: [Conduit](https://conduit.mate.academy)
 
 [Create](https://demoqa.com/register) your account **manually** before completing the task.  
 
