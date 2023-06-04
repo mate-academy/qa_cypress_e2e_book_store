@@ -11,6 +11,10 @@ describe("Book Store app", () => {
     publisher: "O'Reilly Media",
     description: "Like it or not, JavaScript is everywhere ",
   };
+  const alert = {
+    bookAdded: "Book added to your collection.",
+    bookDeleted: "Book deleted.",
+  };
 
   beforeEach(() => {
     cy.visit("/login");
@@ -35,7 +39,7 @@ describe("Book Store app", () => {
     cy.contains("a", book.title).click();
     cy.contains("#addNewRecordButton", "Add To Your Collection").click();
     cy.on("window:alert", (str) => {
-      expect(str).to.equal(testData.alert.bookAdded);
+      expect(str).to.equal(alert.bookAdded);
     });
   });
 
@@ -44,5 +48,8 @@ describe("Book Store app", () => {
     cy.contains("#item-3", "Profile").click();
     cy.contains('[role="row"]', book.title).find('[title="Delete"]').click();
     cy.get("#closeSmallModal-ok").click();
+    cy.on("window:alert", (str) => {
+      expect(str).to.equal(alert.bookDeleted);
+    });
   });
 });
