@@ -1,11 +1,27 @@
 /// <reference types='cypress' />
 
+const testData = {
+  user: {
+    username: 'PipiDodo',
+    password: '!PipiDodo123'
+  },
+  book: {
+    name: 'Speaking JavaScript',
+    description: 'Like it or not, JavaScript is everywhere these days-from browser to server to mobile-and now you, too, need to learn the language or dive deeper than you have. This concise book guides you into and through JavaScript, written by a veteran programmer who o'
+  },
+  alerts: {
+    bookAdded: 'Book added to your collection.',
+    bookDeleted: 'Book deleted.'
+  }
+};
+
+
 describe('Book Store app', () => {
-  beforeEach(() => {
+  before(() => {
     cy.visit('https://demoqa.com/login');
   });
 
-  it('user is able to login, add book to collection and delete it', () => {
+  it('user is able to login', () => {
     const username = 'PipiDodo';
     const password = '!PipiDodo123';
 
@@ -23,6 +39,12 @@ describe('Book Store app', () => {
 
     cy.url()
       .should('eq', 'https://demoqa.com/profile');
+  });
+
+  it('user is able to add book to collection', () => {
+    cy.login(testData.user.username, testData.user.password);
+
+    cy.visit('https://demoqa.com/profile');
 
     cy.contains('#item-2', 'Book Store')
       .click();
@@ -42,7 +64,13 @@ describe('Book Store app', () => {
     cy.on('window:alert', (str) => {
         expect(str).to.equal(`Book added to your collection.`);
     });
-    
+  });
+
+  it('user is able to delete book from collection', () => {
+    cy.login(testData.user.username, testData.user.password);
+
+    cy.visit('https://demoqa.com/profile');
+
     cy.contains('#item-3', 'Profile')
       .click();
     
@@ -59,4 +87,6 @@ describe('Book Store app', () => {
     cy.on('window:alert', (str) => {
       expect(str).to.equal(`Book deleted.`);
   });
+
   });
+ 
