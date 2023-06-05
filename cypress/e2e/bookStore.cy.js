@@ -1,4 +1,4 @@
-/// <reference types="cypress" />
+/// <reference types='cypress' />
 
 describe('Book Store App', () => {
   before(() => {
@@ -10,7 +10,7 @@ describe('Book Store App', () => {
     cy.reload();
   });
 
-  it('Login', () => {
+  it('should provide an ability to login', () => {
     cy.get('#userName').type('bastard99');
     cy.get('#password').type('Qwerty123456!');
     cy.get('#login').click();
