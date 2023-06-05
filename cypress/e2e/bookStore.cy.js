@@ -22,7 +22,7 @@ describe('Book Store app', () => {
      .type(testData.user.username);
 
     cy.get('#password')
-      .type(testData.user.username);
+      .type(testData.user.password);
 
     cy.contains('button', 'Login')
       .click();
