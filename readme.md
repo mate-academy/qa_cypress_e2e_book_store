@@ -1,4 +1,4 @@
-# Cypress: New Article form
+# Cypress: Book Store
 
 ## Workflow
 
@@ -37,10 +37,10 @@ App for testing: [Conduit](https://conduit.mate.academy)
 
 1. Go to your profile page.
 1. Assert 'Speaking JavaScript' in your shopping list.
-1. Delete Speaking JavaScript book from your list.
+1. Delete the Speaking JavaScript book from your list.
 
 ## Advanced level
 
-1. Split your test flow on 3 tests: login, add book, delete book.
+1. Split your test flow into 3 tests: login, add a book, and delete the book.
 1. Create `cy.login()` command to login with API. Use `cy.request()` with `.setCookie()` to implement this command.
 1. Use `cy.login()` in second and third tests.
