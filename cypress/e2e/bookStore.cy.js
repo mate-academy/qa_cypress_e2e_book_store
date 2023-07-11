@@ -7,8 +7,7 @@ describe('Book Store app', () => {
 
   it('performs the desired flow', () => {
     cy.get('#userName').type('testUserName'); 
-    cy.get('input[type="password"]').type('Password1234$'); // Замініть 'your_password' на ваш пароль
-    cy.get('#login').click();
+    cy.get('input[type="password"]').type('Password1234$');
 
     cy.get('#userName-value').should('contain', 'testUserName');
     cy.url().should('eq', 'https://demoqa.com/profile');
