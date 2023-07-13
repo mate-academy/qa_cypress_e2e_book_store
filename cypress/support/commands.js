@@ -23,3 +23,40 @@
 //
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
+
+Cypress.Commands.add('login', () => {
+  const username = 'test123';
+  const Password = 'Test123!';
+
+  cy.visit('https://demoqa.com/login');
+
+  cy.get('#userName').click();
+
+  cy.get('#userName').type(username);
+
+  cy.get('#password').click();
+
+  cy.get('#password').type(Password);
+
+  cy.get('#login').click();
+
+  cy.get('#userName-value').should('contain', username);
+
+  cy.url().should('include', '/profile');
+});
+
+// I also try to use the cy.request, but receive the error 'Because this error occurred during a before each', please, give me advice, what I did wrong
+
+// Cypress.Commands.add('login', (userName, password) => {
+
+//     cy.request('POST', 'https://demoqa.com/login',  {
+
+//             userName: userName,
+//             password: password
+
+//    })
+//         .then(response => {
+//           cy.setCookie('token', response.body.token)
+//       })
+
+// });
