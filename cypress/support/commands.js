@@ -58,5 +58,4 @@ Cypress.Commands.add('login', () => {
 //         .then(response => {
 //           cy.setCookie('token', response.body.token)
 //       })
-
 // });
