@@ -43,3 +43,12 @@ Cypress.Commands.add('login', (username = 'JonJon', password = 'Pa$$word1') => {
     cy.setCookie('userName', response.body.username);
   });
 });
+
+Cypress.Commands.add('addBook', () => {
+  cy.get('#gotoStore').click();
+  cy.get('#searchBox').type('Speaking JavaScript');
+  cy.contains('a', 'Speaking JavaScript').click();
+  cy.contains('#addNewRecordButton', 'Add To Your Collection').click();
+  cy.visit('/profile');
+  cy.contains('a', 'Speaking JavaScript').should('be.visible');
+});

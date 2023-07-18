@@ -44,11 +44,13 @@ describe('Book Store app', () => {
     });
   });
 
-  it('should allow to delete a book from the user collection', () => {
+  it.only('should allow to delete a book from the user collection', () => {
     cy.login();
     cy.visit('/profile');
-    cy.contains('a', book.title);
-    cy.get('#delete-record-undefined').click();
+    cy.addBook();
+    cy.contains('a', book.title).should('be.visible');
+    cy.contains('[role="row"]', book.title)
+      .find('#delete-record-undefined').click();
     cy.get('#closeSmallModal-ok').click();
     cy.on('window:alert', (str) => {
       expect(str).to.equal(`Book deleted.`);
