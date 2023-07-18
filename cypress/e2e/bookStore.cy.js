@@ -16,7 +16,7 @@ describe('Book Store app', () => {
     cy.visit('/login');
   });
 
-  it('slould allow to login', () => {
+  it('slould allow to login and  add a book to user collection', () => {
     cy.get('#userName').type(user.username);
     cy.findByPlaceholder('Password').type(user.password);
     cy.get('#login')
@@ -26,7 +26,7 @@ describe('Book Store app', () => {
 
     cy.visit('/profile');
 
-    cy.get(':nth-child(6) > .element-list > .menu-list > #item-2 > .text')
+    cy.get('#gotoStore').should('contain.text', 'Go To Book Store')
       .click();
     cy.findByPlaceholder('Type to search').type(book.title);
     cy.contains(book.title)
@@ -51,5 +51,7 @@ describe('Book Store app', () => {
       .click();
 
     cy.get('#closeSmallModal-ok').click();
+
+    cy.visit('/profile');
   });
 });
