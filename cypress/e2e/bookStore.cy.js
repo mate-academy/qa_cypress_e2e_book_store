@@ -13,37 +13,40 @@ describe('Book Store app', () => {
   };
 
   before(() => {
-    cy.visit('https://demoqa.com/');
+    cy.visit('/');
   });
 
   it('should allow to login with valid credentials', () => {
-    cy.visit('https://demoqa.com/login');
+    cy.visit('/login');
     cy.findByPlaceholder('UserName').type(user.username);
     cy.findByPlaceholder('Password').type(user.password);
     cy.get('#login').click();
     cy.get('#userName-value').should('be.visible');
-  });
+    cy.url().should('include', '/profile');
+    cy.visit('/login');
 
-  it('should  allow to add a book to collection', () => {
-    cy.visit('https://demoqa.com/login');
-    cy.get(':nth-child(6) > .element-list > .menu-list > #item-2 > .text')
-      .click();
-
-    cy.get('#searchBox').type(book.name);
-    cy.contains('a', book.name).click();
-    cy.get('#description-wrapper').should('contain', book.description);
-    cy.on('window:alert', (str) => {
-      expect(str).to.equal(`Book added to your collection.`);
-    });
-
-    it('should allow to delete added book from collection', () => {
-      cy.visit('https://demoqa.com/profile');
-
-      cy.contains('a', book.name);
-      cy.get('#delete-record-undefined').click();
-      cy.get('#closeSmallModal-ok').click();
+    it('should allow to add a book in user collection', () => {
+      cy.login(user.userName, user.password);
+      cy.get(':nth-child(6) > .element-list > .menu-list > #item-2 > .text')
+        .click();
+      cy.get('#searchBox').type(book.name);
+      cy.contains('a', book.name).click();
+      cy.get('#description-wrapper').should('contain', book.description);
       cy.on('window:alert', (str) => {
-        expect(str).to.equal('Book deleted.');
+        expect(str).to.equal(`Book added to your collection.`);
+        cy.visit('/profile');
+        cy.contains('a', 'Speaking JavaScript').should('be.visible');
+      });
+
+      it('should allow to delete the book from user collection', () => {
+        cy.login(user.userName, user.password);
+        cy.visit('/profile');
+        cy.contains('a', 'Speaking JavaScript').should('be.visible');
+        cy.get('#delete-record-undefined').click();
+        cy.get('#closeSmallModal-ok').click();
+        cy.on('window:alert', (str) => {
+          expect(str).to.equal(`Book deleted.`);
+        });
       });
     });
   });
