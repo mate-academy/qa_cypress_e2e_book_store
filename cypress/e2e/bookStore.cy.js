@@ -13,7 +13,7 @@ describe('Book Store app', () => {
     description: 'Like it or not, JavaScript is everywhere these days'
   };
 
-  before(() => {
+  beforeEach(() => {
     cy.visit('/login')
   });
 
@@ -34,7 +34,6 @@ describe('Book Store app', () => {
     cy.contains('a', book.title).click();
     cy.get('#description-wrapper').should('contain', book.description);
     cy.get('#title-wrapper').should('contain', book.title);
-    cy.viewport(1200, 800);
     cy.get('.text-right > #addNewRecordButton').click();
     cy.on('window:alert', (str) => {
       expect(str).to.equal(`Book added to your collection.`);
@@ -43,15 +42,24 @@ describe('Book Store app', () => {
     cy.contains('a', book.title).should('be.visible')
   });
 
-  it('should allow to delete a book', () => {
+  it('should allow to delete a book from collection', () => {
     cy.login();
     cy.visit('/profile');
+    cy.contains('#item-2', 'Book Store').click();
+    cy.findByPlaceholder('Type to search').type(book.title);
+    cy.contains('a', book.title).click();
+    cy.get('.text-right > #addNewRecordButton').click();
+    cy.visit('/profile');
+    cy.contains('a', book.title).should('be.visible');
     cy.get('#delete-record-undefined').click();
-    cy.get('.modal-body').should('contain', 'Do you want to delete this book?');
+    cy.on('window:alert', (alert) => {
+      expect(alert).to.equal(alertMessage.deleted);
+    });
     cy.get('#closeSmallModal-ok').click();
     cy.on('window:alert', (str) => {
-      expect(str).to.equal(`Book deleted.`);
-    cy.get('.rt-noData').should('contain', 'No rows found');
+      expect(str).to.equal('Book deleted.');
     });
+    cy.visit('/profile');
+    cy.get('.rt-noData').should('contain', 'No rows found');
   });
 });
