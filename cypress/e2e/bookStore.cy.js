@@ -12,15 +12,11 @@ describe('Book Store app', () => {
     isbn: '9781449365035'
   };
 
-  const alertMessage = {
-    deleted: 'Book deleted.'
-  };
-
-  before(() => {
+  beforeEach(() => {
     cy.visit('/login');
   });
 
-  it('should allow to log in and add,delete the book from collection', () => {
+  it('should allow to log in', () => {
     cy.findByPlaceholder('UserName').type(user.username);
 
     cy.findByPlaceholder('Password').type(user.password);
@@ -30,6 +26,14 @@ describe('Book Store app', () => {
     cy.findById('userName-value').should('contain.text', user.username);
 
     cy.url().should('include', '/profile');
+  });
+
+  it('should allow to add the book to the collection', () => {
+    cy.login(user.username, user.password);
+
+    cy.visit('/profile');
+
+    cy.findById('userName-value').should('contain.text', user.username);
 
     cy.findById('gotoStore').should('contain.text', 'Go To Book Store')
       .click();
@@ -47,6 +51,18 @@ describe('Book Store app', () => {
     cy.contains('#addNewRecordButton', 'Add To Your Collection')
       .click();
 
+    cy.on('window:alert', (str) => {
+      expect(str).to.equal('Book added to your collection.');
+    });
+
+    cy.visit('/profile');
+
+    cy.contains('a', book.bookTitle).should('be.visible');
+  });
+
+  it('should allow to delete the book from the collection', () => {
+    cy.login(user.username, user.password);
+
     cy.visit('/profile');
 
     cy.contains('a', book.bookTitle).should('be.visible');
@@ -57,7 +73,7 @@ describe('Book Store app', () => {
     cy.findById('closeSmallModal-ok').click();
 
     cy.on('window:alert', (str) => {
-      expect(str).to.equal(alertMessage.deleted);
+      expect(str).to.equal('Book deleted.');
     });
   });
 });
