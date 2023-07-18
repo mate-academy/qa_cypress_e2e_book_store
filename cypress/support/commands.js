@@ -42,3 +42,12 @@ Cypress.Commands.add('login', (username = 'Adam', password = '12345Qwert!') => {
     cy.setCookie('userName', response.body.username);
   });
 });
+
+Cypress.Commands.add('addNewBook', () => {
+  cy.get('#gotoStore').click();
+  cy.findByPlaceholder('Type to search').type('Speaking JavaScript');
+  cy.contains('a', 'Speaking JavaScript').click();
+  cy.get('#title-wrapper').should('contain', 'Speaking JavaScript');
+  cy.visit('/profile');
+  cy.contains('a', 'Speaking JavaScript').should('be.visible');
+});
