@@ -11,12 +11,7 @@ describe('Book Store app', () => {
     author: 'Axel Rauschmayer',
     description: 'Like it or not, JavaScript is everywhere these days'
   };
-
-  const alertMessage = {
-    added: 'Book added to your collection.',
-    deleted: 'Book deleted'
-  };
-
+  
   beforeEach(() => {
     cy.visit('/login');
   });
@@ -44,8 +39,8 @@ describe('Book Store app', () => {
 
     cy.contains('#addNewRecordButton', 'Add To Your Collection').click();
 
-    cy.on('window:alert', (alert) => {
-      expect(alert).to.equal(alertMessage.added)
+    cy.on('window:alert', (str) => {
+      expect(str).to.equal('Book added to your collection.')
     });
   });
 
@@ -59,8 +54,8 @@ describe('Book Store app', () => {
     cy.get('#delete-record-undefined').click();
     cy.get('#closeSmallModal-ok').click();
 
-    cy.on('window:alert', (alert) => {
-      expect(alert).to.equal(alertMessage.deleted)
+    cy.on('window:alert', (str) => {
+      expect(str).to.equal('Book deleted.');
     });
   });
 });
