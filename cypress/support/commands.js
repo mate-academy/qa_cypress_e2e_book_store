@@ -47,7 +47,8 @@ Cypress.Commands.add('addNewBook', () => {
   cy.get('#gotoStore').click();
   cy.findByPlaceholder('Type to search').type('Speaking JavaScript');
   cy.contains('a', 'Speaking JavaScript').click();
-  cy.get('#title-wrapper').should('contain', 'Speaking JavaScript');
+  cy.contains('#addNewRecordButton', 'Add To Your Collection')
+    .click();
   cy.visit('/profile');
   cy.contains('a', 'Speaking JavaScript').should('be.visible');
 });

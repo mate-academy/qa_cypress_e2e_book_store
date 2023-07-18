@@ -40,6 +40,9 @@ describe('Book Store app', () => {
     });
     cy.visit('profile');
     cy.contains('a', book.title).should('be.visible');
+    cy.contains('[role="row"]', book.title).find('[title = "Delete"]')
+      .click();
+    cy.get('#closeSmallModal-ok').click();
   });
 
   it('should allow to delete a book', () => {
