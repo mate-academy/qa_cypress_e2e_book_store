@@ -59,8 +59,18 @@ describe('Book Store app', () => {
     });
   });
 
-  it('should allow to delete a book from collection', () => {
+  it.only('should allow to delete a book from collection', () => {
     cy.login();
+
+    cy.visit('/profile');
+
+    cy.contains('#item-2', 'Book Store').click();
+
+    cy.findByPlaceholder('Type to search').type(book.title);
+
+    cy.contains('a', book.title).click();
+
+    cy.contains('#addNewRecordButton', 'Add To Your Collection').click();
 
     cy.visit('/profile');
 
