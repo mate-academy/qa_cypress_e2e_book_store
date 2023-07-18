@@ -6,14 +6,14 @@ describe('Book Store app', () => {
   const book = "Speaking JavaScript";
   const description = "Like it or not, JavaScript is everywhere";
 
-  beforeEach(() => {
+  before(() => {
   
-    cy.visit('/books');
+    cy.visit('/login');
     
   });
 
   it('should test the given flow', () => {
-    cy.contains("Login").click();
+    
     cy.get('#userName').type(username);
     cy.get('#password').type(password);
     cy.get('#login').click();
@@ -28,7 +28,7 @@ describe('Book Store app', () => {
     cy.on('window:alert', (str) => {
       expect(str).to.equal(`Book added to your collection.`)
   })
-  
+
     cy.visit('/profile');
     cy.contains ('a', book);
     cy.get('#delete-record-undefined > svg').click();
