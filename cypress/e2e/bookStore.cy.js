@@ -58,12 +58,17 @@ describe('Book Store app', () => {
     cy.visit('/profile');
 
     cy.contains('a', book.bookTitle).should('be.visible');
+
+    cy.contains('[role="row"]', book.bookTitle).find('[title = "Delete"]')
+      .click();
   });
 
   it('should allow to delete the book from the collection', () => {
     cy.login(user.username, user.password);
 
     cy.visit('/profile');
+
+    cy.addNewBook();
 
     cy.contains('a', book.bookTitle).should('be.visible');
 

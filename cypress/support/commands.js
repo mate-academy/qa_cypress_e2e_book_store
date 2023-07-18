@@ -47,3 +47,19 @@ Cypress.Commands.add('login', (username, password) => {
     cy.setCookie('userName', response.body.username);
   });
 });
+
+Cypress.Commands.add('addNewBook', () => {
+  cy.findById('gotoStore').should('contain.text', 'Go To Book Store')
+    .click();
+
+  cy.findById('searchBox').type('Speaking JavaScript');
+
+  cy.contains('a', 'Speaking JavaScript').click();
+
+  cy.contains('#addNewRecordButton', 'Add To Your Collection')
+    .click();
+
+  cy.visit('/profile');
+
+  cy.contains('a', 'Speaking JavaScript').should('be.visible');
+});
