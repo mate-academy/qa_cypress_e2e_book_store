@@ -3,8 +3,8 @@
 describe('Book Store app', () => {
   const username = 'q12341234';
   const password = 'qW#12345';
-  const book = 'Git Pocket Guide';
-  const description = 'This pocket guide';
+  const book = 'Speaking JavaScript';
+  const description = 'Like it';
 
   before(() => {
     cy.visit('/login');
