@@ -11,15 +11,15 @@ describe('Book Store app', () => {
   });
 
   it('should allow to login', () => {
-    cy.findByPlaceholder('Username').type(user.userName);
+    cy.findByPlaceholder('UserName').type(user.userName);
     cy.findByPlaceholder('Password').type(user.password);
     cy.get('#login').click();
     cy.get('#userName-value').should('contain', user.userName);
     cy.url().should('include', 'profile');
   });
 
-  it.only('should allow to add a book to user collection', () => {
-    cy.login();
+  it('should allow to add a book to user collection', () => {
+    cy.login(user.userName, user.password);
     cy.visit('/profile');
     cy.contains('#item-2', 'Book Store').click();
     cy.findByPlaceholder('Type to search').type('Speaking JavaScript');
@@ -34,8 +34,8 @@ describe('Book Store app', () => {
     cy.contains('a', 'Speaking JavaScript').should('be.visible');
   });
 
-  it.only('should allow to delete the book from user collection', () => {
-    cy.login();
+  it('should allow to delete the book from user collection', () => {
+    cy.login(user.userName, user.password);
     cy.visit('/profile');
     cy.contains('a', 'Speaking JavaScript').should('be.visible');
     cy.get('#delete-record-undefined').click();
