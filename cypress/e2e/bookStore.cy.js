@@ -14,7 +14,7 @@ describe('Book Store app', () => {
     cy.visit('/login');
   });
 
-  it('User is able to login', () => {
+  it('system allow to login', () => {
     cy.findByPlaceholder('UserName').type(user.username);
     cy.findByPlaceholder('Password').type(user.password);
     cy.get('#login').click();
@@ -22,7 +22,7 @@ describe('Book Store app', () => {
     cy.url().should('include', '/profile');
   });
 
-  it('User is able to add a book', () => {
+  it('system allow  to add a book', () => {
     cy.login();
     cy.visit('/profile');
     cy.contains('#item-2', 'Book Store').click();
@@ -35,10 +35,14 @@ describe('Book Store app', () => {
     });
     cy.visit('/profile');
     cy.contains('a', book.title).should('be.visible');
+    cy.get('#delete-record-undefined').click();
+    cy.get('.modal-body').should('contain', 'Do you want to delete this book?');
+    cy.get('#closeSmallModal-ok').click();
   });
-  it('User is able to delete a book', () => {
+  it('system allow to delete a book', () => {
     cy.login();
     cy.visit('/profile');
+    cy.addBook();
     cy.get('#delete-record-undefined').click();
     cy.get('.modal-body').should('contain', 'Do you want to delete this book?');
     cy.get('#closeSmallModal-ok').click();
