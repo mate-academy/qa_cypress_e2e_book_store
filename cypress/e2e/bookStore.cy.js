@@ -69,6 +69,28 @@ describe('Book Store app', () => {
 
     cy.visit('/profile');
 
+    cy.get('#gotoStore')
+      .click();
+
+    cy.get('#searchBox')
+      .type(book.name);
+
+    cy.contains('a', book.name)
+      .click();
+
+    cy.get('#description-wrapper')
+      .should('contain', book.description);
+
+    cy.get('.btn.btn-primary')
+      .eq(2)
+      .click();
+
+    cy.on('window:alert', (str) => {
+      expect(str).to.equal(`Book added to your collection.`);
+    });
+
+    cy.visit('/profile');
+
     cy.contains('a', book.name);
 
     cy.get('#delete-record-undefined')
