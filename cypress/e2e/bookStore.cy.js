@@ -18,7 +18,7 @@ describe('Book Store app', () => {
     deleted: 'Book deleted.'
   };
 
-  beforeEach(() => {
+  beforeEach(('Book store'), () => {
     cy.visit('/login');
   });
 
@@ -32,7 +32,7 @@ describe('Book Store app', () => {
 
   it('should add a book to the collection', () => {
     cy.viewport(750, 600);
-    cy.login();
+    cy.login(user.username, user.password);
     cy.visit('/profile');
     cy.contains('#item-2', 'Book Store').click();
     cy.findByPlaceholder('Type to search').type(book.title);
@@ -45,7 +45,7 @@ describe('Book Store app', () => {
   });
 
   it('should delete a book from the collection', () => {
-    cy.login();
+    cy.login(user.username, user.password);
     cy.visit('/profile');
     cy.get('#delete-record-undefined').click();
     cy.get('.modal-body').should('contain', 'Do you want to delete this book');
