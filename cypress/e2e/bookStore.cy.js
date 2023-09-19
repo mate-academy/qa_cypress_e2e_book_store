@@ -20,7 +20,7 @@ describe('Book Store app', () => {
     cy.url().should('contain', 'profile');
   });
 
-  it('shloud provide ability to add and delete a book from the cart', () => {
+  it('shloud provide ability to add to the cart', () => {
     cy.get('#gotoStore').click();
     cy.get('#searchBox').type(book.title);
     cy.get('[href="/books?book=9781449365035"]').click();
