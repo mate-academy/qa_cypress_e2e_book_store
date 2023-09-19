@@ -36,7 +36,7 @@ describe('Book Store app', () => {
     cy.get('.text-right #addNewRecordButton').click();
 
     cy.on('window:alert', (alert) => {
-      expect(alert).to.equal(alertText.alertTextAdded);
+      expect(alert).to.equal(alertTextAdded);
     });
     cy.get('.menu-list').contains('Profile').click();
     cy.get('.rt-table').should('contain', book.title);
@@ -44,7 +44,7 @@ describe('Book Store app', () => {
     cy.get('[id="closeSmallModal-ok"]').click();
 
     cy.on('window:alert', (alert) => {
-      expect(alert).to.equal(alertText.alertTextDeleted);
+      expect(alert).to.equal(alertTextDeleted);
     });
   });
 });
