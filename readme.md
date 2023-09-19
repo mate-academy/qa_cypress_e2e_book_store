@@ -15,7 +15,7 @@
 
 App for testing: [Conduit](https://conduit.mate.academy)
 
-[Create](https://demoqa.com/register) your account **manually** before completing the task.  
+[Create](htps://demoqa.com/register) your account **manually** beftore completing the task.  
 
 **Your task** is to check next flow:
 
