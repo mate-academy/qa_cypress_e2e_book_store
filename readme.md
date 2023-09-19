@@ -9,22 +9,22 @@
 1. Resolve tasks in the `cypress`/`e2e`/`createArticle.cy.js`.
 1. Check yourself before submitting the task with a [Cypress checklist](https://mate-academy.github.io/qa-program/checklists/cypress.html).
 1. Create a pull request.
-1. Do not forget to click on `Re-request review` if you submit the homework after previous review.
+1. Do not forget to click `Re-request review` if you submit the homework after the previous review.
 
 ## Task
 
-App for testing: [Conduit](https://conduit.mate.academy)
+App for testing: [BookStore](https://demoqa.com/register)
 
 [Create](https://demoqa.com/register) your account **manually** before completing the task.  
 
-**Your task** is to check next flow:
+**Your task** is to check the following flow:
 
 1. Login:
    - assert your username after login username;
-   - asser new url;
+   - asser new URL;
 1. Navigate to `Book store`.
-1. Type into search field 'Speaking JavaScript'.
-1. Click on 'Speaking JavaScript' book.
+1. Type into the search field 'Speaking JavaScript'.
+1. Click on the 'Speaking JavaScript' book.
    - assert description of the book.
 1. Click on [Add To Your Collection].
 1. Confirm popup. You can do it with cy.on():
@@ -42,5 +42,5 @@ App for testing: [Conduit](https://conduit.mate.academy)
 ## Advanced level
 
 1. Split your test flow into 3 tests: login, add a book, and delete the book.
-1. Create `cy.login()` command to login with API. Use `cy.request()` with `.setCookie()` to implement this command.
+1. Create `cy.login()` command to login with API. To implement this command, use `cy.request()` with `.setCookie()`.
 1. Use `cy.login()` in second and third tests.
