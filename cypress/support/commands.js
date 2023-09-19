@@ -23,3 +23,13 @@
 //
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
+
+Cypress.Commands.add('getByPlaceholder', (placeholder) => {
+  return cy.get(`[placeholder='${placeholder}']`);
+});
+
+Cypress.Commands.add('confirmDialog', (returnValue) => {
+  cy.window().then((win) => {
+    cy.stub(win, 'confirm').returns(returnValue);
+  });
+});
