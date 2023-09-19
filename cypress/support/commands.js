@@ -32,12 +32,9 @@ Cypress.Commands.add('urlShouldContainText', (partOfUrl) => {
   cy.url().should('contain', partOfUrl);
 });
 
-// Cypress.Commands.add('login', (username, password) => {
-//   cy.visit('https://demoqa.com/login');
-//     cy.findByPlaceholder('UserName').type(username);
-//     cy.findByPlaceholder('Password').type(password);
-//     cy.get('#login').click();
-
-//     cy.urlShouldContainText('profile');
-//     cy.get('#userName-value').should('contain', 'naidaBecker');
-// });
+Cypress.Commands.add('login', (username, password) => {
+  cy.visit('https://demoqa.com/login');
+  cy.findByPlaceholder('UserName').type(username);
+  cy.findByPlaceholder('Password').type(password);
+  cy.get('#login').click();
+});
