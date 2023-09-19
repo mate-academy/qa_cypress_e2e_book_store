@@ -16,14 +16,13 @@ describe('Book Store app', () => {
     description: 'Like it or not, JavaScript is everywhere'
   };
 
-  it.skip('should provide ability to Login', () => {
+  it('should provide ability to Login', () => {
     cy.login(userName, password);
     cy.url().should('contain', 'profile');
     cy.get('#userName-value').should('contain', userName);
   });
 
   it('should provide ability to add and delete book', () => {
-    cy.viewport(1920, 1080);
     cy.login(userName, password);
     cy.wait(2000);
     cy.get('.menu-list #item-2').contains('Book Store').click();
