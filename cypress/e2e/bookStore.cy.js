@@ -14,14 +14,10 @@ describe('Book Store app', () => {
     cy.visit('https://demoqa.com/login');
   });
 
-  function login(username, password) {
+  it('Ability to LogIn', () => {
     cy.get('#userName').type(username);
     cy.get('#password').type(password);
     cy.get('#login').click();
-  };
-
-  it('Ability to LogIn', () => {
-    login(username, password);
 
     cy.get('#userName-value').should('contain', username);
     cy.url().should('contain', '/profile');
@@ -47,9 +43,8 @@ describe('Book Store app', () => {
     cy.login(username, password);
     cy.url().should('contain', '/profile');
 
-    cy.get(':nth-child(6) > .element-list > .menu-list > #item-3').click();
-    cy.get('.rt-tbody > :nth-child(1) > .rt-tr > :nth-child(2)')
-      .should('contain', bookTitle);
+    cy.get('.menu-list').contains('Profile').click();
+    cy.get('.rt-table').should('contain', 'Speaking JavaScript');
 
     cy.get('#delete-record-undefined > svg').click();
     cy.get('#closeSmallModal-ok').click();
