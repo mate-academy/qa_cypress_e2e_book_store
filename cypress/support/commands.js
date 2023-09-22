@@ -23,3 +23,31 @@
 //
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
+
+Cypress.Commands.add('findByPlaceholder', (placeholder) => {
+  cy.get(`[placeholder='${placeholder}']`);
+});
+
+Cypress.Commands.add('login', (username = 'Anna', password = '12345Qwert!') => {
+  cy.request({
+    method: 'POST',
+    url: 'https://demoqa.com/Account/v1/Login',
+    body: {
+      userName: username,
+      password
+    }
+  }).then((response) => {
+    cy.setCookie('token', response.body.token);
+    cy.setCookie('userID', response.body.userId);
+    cy.setCookie('expires', response.body.expires);
+    cy.setCookie('userName', response.body.username);
+  });
+});
+
+Cypress.Commands.add('addBook', () => {
+  cy.contains('#item-2', 'Book Store').click();
+  cy.findByPlaceholder('Type to search').type('Speaking JavaScript');
+  cy.contains('a', 'Speaking JavaScript').click();
+  cy.get('.text-right > #addNewRecordButton').click();
+  cy.visit('/profile');
+});
