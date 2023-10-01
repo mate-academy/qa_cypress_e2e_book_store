@@ -14,3 +14,7 @@ Cypress.Commands.add('login', (username, password) => {
   cy.findByPlaceholder('Password').type(password);
   cy.get('#login').click();
 });
+
+Cypress.Commands.add('restoreSession', () => {
+  cy.setCookie('your-auth-cookie', Cypress.env('authCookie'));
+});
