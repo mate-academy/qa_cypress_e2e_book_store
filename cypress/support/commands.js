@@ -1,25 +1,30 @@
-// ***********************************************
-// This example commands.js shows you how to
-// create various custom commands and overwrite
-// existing commands.
-//
-// For more comprehensive examples of custom
-// commands please read more here:
-// https://on.cypress.io/custom-commands
-// ***********************************************
-//
-//
-// -- This is a parent command --
-// Cypress.Commands.add('login', (email, password) => { ... })
-//
-//
-// -- This is a child command --
-// Cypress.Commands.add('drag', { prevSubject: 'element'}, (subject, options) => { ... })
-//
-//
-// -- This is a dual command --
-// Cypress.Commands.add('dismiss', { prevSubject: 'optional'}, (subject, options) => { ... })
-//
-//
-// -- This will overwrite an existing command --
-// Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
+Cypress.Commands.add('getElementById', (id) => {
+  cy.get(`#${id}`);
+});
+
+Cypress.Commands.add('getElementByAttribute', (name, value) => {
+  cy.get(`[${name}="${value}"]`);
+});
+
+Cypress.Commands.add('findAndFillInput', (id, value) => {
+  cy.getElementById(id).clear();
+  cy.getElementById(id).type(value);
+});
+
+Cypress.Commands.add('login', (userName, password) => {
+  cy.request('POST', '/Account/v1/Login', {
+    userName,
+    password
+  }).then((res) => {
+    cy.setCookie('token', res.body.token);
+    cy.setCookie('expires', res.body.expires);
+    cy.setCookie('userID', res.body.userId);
+    cy.setCookie('userName', res.body.username);
+    cy.visit('/profile');
+  });
+});
+
+Cypress.Commands.add('findOneItem', (query) => {
+  cy.getElementById('searchBox').type(query);
+  cy.contains('a', query).should('exist');
+});
