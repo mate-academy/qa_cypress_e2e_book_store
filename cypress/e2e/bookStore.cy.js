@@ -15,7 +15,7 @@ describe('Book Store app', () => {
     cy.visit('/login');
   });
 
-  it('should provide the ability to login, search, add and delete book', () => {
+  it('should provide the ability to login', () => {
     cy.get('#userName')
       .type(user.username);
     cy.get('#password')
@@ -26,7 +26,10 @@ describe('Book Store app', () => {
       .should('contain', user.username);
     cy.url()
       .should('contain', '/profile');
-    cy.visit('/profile');
+  });
+    
+  it('should provide the ability to search and add book to the collection', () => {
+    cy.login();
     cy.get('#gotoStore')
       .click();
     cy.get('#searchBox')
@@ -39,13 +42,19 @@ describe('Book Store app', () => {
       .click();
     cy.on('window:alert', (str) => {
       expect(str).to.equal(`Book added to your collection.`)
-    })
-    cy.visit('/profile')
+    });
+  });
+
+  it('Should provide the ability to delete book from the collection', () => {
+    cy.login();
     cy.get('.mr-2')
       .should('contain', book.title);
-    cy.get('delete-record-undefined')
+    cy.get('[title="Delete"]')
       .click();
     cy.get('closeSmallModal-ok')
       .click();
+    cy.on('window:alert', (str) => {
+        expect(str).to.equal(`Book deleted.`);
+    });
   });
 });
