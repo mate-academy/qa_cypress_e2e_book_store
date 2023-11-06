@@ -34,7 +34,7 @@ describe('Book Store app', () => {
       .should('contain', user.username);
   });
 
-  it('should provide an ability to navigate to Book Store', () => {
+  it('should provide an ability to add a book', () => {
     cy.login();
     cy.visit('/profile');
     cy.get('#gotoStore')
