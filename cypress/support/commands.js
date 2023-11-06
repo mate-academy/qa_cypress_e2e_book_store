@@ -16,4 +16,5 @@ Cypress.Commands.add('login', (username = 'Qwerty', password = 'Qwerty123@') => 
     cy.setCookie('expires', response.body.expires);
     cy.setCookie('userName', response.body.username);
   });
+  cy.visit('/profile');
 });

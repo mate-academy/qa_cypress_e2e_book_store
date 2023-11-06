@@ -22,7 +22,7 @@ describe('Book Store app', () => {
 
   it('should provide ability to add the book to the collection', () => {
     cy.login();
-    cy.visit('/profile');
+    cy.url('contains', '/profile');
 
     cy.get('.menu-list').contains('Book Store').click();
     cy.get('[placeholder="Type to search"]').type(bookTitle);
@@ -40,7 +40,7 @@ describe('Book Store app', () => {
 
   it('should provide ability to delete book from the collection', () => {
     cy.login();
-    cy.visit('/profile');
+    cy.url('contains', '/profile');
 
     cy.get('.menu-list').contains('Profile').click();
     cy.get('.rt-table').should('contain', 'Speaking JavaScript');
