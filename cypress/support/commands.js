@@ -31,4 +31,6 @@ Cypress.Commands.add('login', (username, password) => {
     .type(password);
   cy.get('button[id="login"]')
     .click();
+  cy.url()
+    .should('contain', 'https://demoqa.com/profile');
 });
