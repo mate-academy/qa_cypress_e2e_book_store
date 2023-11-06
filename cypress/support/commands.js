@@ -22,9 +22,19 @@
 //
 //
 // -- This will overwrite an existing command --
-// Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
-Cypress.Commands.add('login', (username, password) => {
-   cy.get('#userName').type(username);
-   cy.get('#password').type(password);
-   cy.get('#login').click();
+// Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... }
+Cypress.Commands.add('login', (username = 'testqa', password = 'Qwerty123$') => {
+   cy.request({
+     method: 'POST',
+     url: 'https://demoqa.com/Account/v1/Login',
+     body: {
+       "userName": username,
+       "password": password
+     }
+   }).then((response) => {
+     cy.setCookie('token', response.body.token);
+     cy.setCookie('userName', response.body.username);
+     cy.setCookie('userID', response.body.userId);
+     cy.setCookie('expires', response.body.expires);
+   });
  });

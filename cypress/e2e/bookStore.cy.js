@@ -24,10 +24,9 @@ it('should provide the ability to log in', () => {
 
 it('should allow adding the book to the collection', () => {
  cy.login(username, password);
- cy.url()
-  .should('contain', 'https://demoqa.com/profile');
+ cy.visit('https://demoqa.com/profile');
 
- cy.get('.menu-list').contains('Book Store')
+cy.get('.menu-list').contains('Book Store')
   .click();
  cy.get('#searchBox')
   .type('Speaking JavaScript');
@@ -48,8 +47,7 @@ it('should allow adding the book to the collection', () => {
 
 it('Should allow deleting book from collection', () => {
  cy.login(username, password);
- cy.url()
-  .should('contain', 'https://demoqa.com/profile');
+ cy.visit('https://demoqa.com/profile');
 
  cy.get('.menu-list')
   .contains('Profile').click();
@@ -63,6 +61,6 @@ it('Should allow deleting book from collection', () => {
   expect(str).to.equal('Do you want to delete this book?');
 });
  cy.get('.rt-td')
-  .contains('Speaking JavaScript').should('not.exist');
+ .contains('Speaking JavaScript').should('not.exist');
   });
  })
