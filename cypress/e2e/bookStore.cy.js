@@ -1,8 +1,10 @@
 /// <reference types='cypress' />
 
 describe('Book Store app', () => {
-  const username = 'test_qa';
-  const password = 'Qwerty123@';
+  const user = {
+    username: 'test_qa',
+    password: 'Qwerty123@'
+  };
 
   const book = {
     title: 'Speaking JavaScript',
@@ -12,19 +14,18 @@ describe('Book Store app', () => {
   beforeEach(() => {
     cy.viewport(1920, 1080);
     cy.visit('https://demoqa.com/login');
-    cy.get('#userName')
-      .type(username);
-    cy.get('#password')
-      .type(password);
-    cy.get('#login')
-      .click();
-    cy.get('#userName-value')
-      .should('contain', username);
-    cy.url()
-      .should('include', '/profile');
+  });
+
+  it('should provide the ability to log in', () => {
+    cy.login(user.username, user.password);
+
+    cy.contains(user.username)
+      .should('be.visible');
   });
 
   it('should provide ability to add a book', () => {
+    cy.login(user.username, user.password);
+
     cy.get('#gotoStore')
       .click();
 
@@ -47,6 +48,11 @@ describe('Book Store app', () => {
   });
 
   it('should provide ability to delete a book', () => {
+    cy.login(user.username, user.password);
+
+    cy.contains(user.username)
+      .should('be.visible');
+
     cy.get('.menu-list').contains('Profile')
       .click();
     cy.get('.rt-table')
