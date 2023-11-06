@@ -25,7 +25,7 @@ describe('Book Store app', () => {
   it('should provide the ability to log in', () => {
     cy.login(user.username, user.password);
 
-    cy.contains('rovypogeq')
+    cy.contains(user.username)
       .should('be.visible');
   });
 
