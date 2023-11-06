@@ -21,8 +21,7 @@ describe('Book Store app', () => {
       .should('contain', 'https://demoqa.com/profile');
   });
 
-  it('should provide ability to search for the book, to add to the' +
-    'cart and delete the book from the cart', () => {
+  it('should provide ability to search for the book, to add to thecart', () => {
     cy.login('Qwerty12345', 'Qwerty12345@');
     cy.visit('/profile');
     cy.get('#gotoStore')
@@ -40,12 +39,19 @@ describe('Book Store app', () => {
     cy.on('window:alert', (str) => {
       expect(str).to.equal(`Book added to your collection.`);
     });
+    cy.get('.text-left > #addNewRecordButton')
+      .click();
     cy.visit('/profile');
-    cy.get('.ReactTable')
-      .should('contain', 'Speaking JavaScript');
+  });
+
+  it('should provide ability to delete the book from the cart', () => {
+    cy.login('Qwerty12345', 'Qwerty12345@');
+    cy.visit('/profile');
     cy.get('#delete-record-undefined')
       .click();
     cy.get('#closeSmallModal-ok')
       .click();
+    cy.get('.rt-noData')
+      .should('contain', 'No rows found');
   });
 });
