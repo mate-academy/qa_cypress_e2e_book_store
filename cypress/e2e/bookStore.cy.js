@@ -5,7 +5,7 @@ describe('Book Store app', () => {
  const password = 'Qwerty123$';
 
 beforeEach(() => {
- cy.visit('https://demoqa.com/login');
+ cy.visit('/login');
  cy.viewport(1920, 1080);
   });
 
@@ -19,12 +19,12 @@ it('should provide the ability to log in', () => {
  cy.get('#userName-value')
   .should('have.text', username);
  cy.url()
-  .should('contain', 'https://demoqa.com/profile');
+  .should('contain', '/profile');
   });
 
 it('should allow adding the book to the collection', () => {
  cy.login(username, password);
- cy.visit('https://demoqa.com/profile');
+ cy.url('contains', '/profile');
 
 cy.get('.menu-list').contains('Book Store')
   .click();
@@ -47,7 +47,7 @@ cy.get('.menu-list').contains('Book Store')
 
 it('Should allow deleting book from collection', () => {
  cy.login(username, password);
- cy.visit('https://demoqa.com/profile');
+ cy.url('contains', '/profile');
 
  cy.get('.menu-list')
   .contains('Profile').click();
