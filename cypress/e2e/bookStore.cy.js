@@ -20,7 +20,7 @@ describe('Book Store app', () => {
     cy.visit('/login');
 });
 
-  it('', () => {
+  it('Login', () => {
     cy.get('#userName')
     .type(user.username),
     cy.get('#password')
@@ -34,7 +34,7 @@ describe('Book Store app', () => {
   });
 
 
-  it('', () => {
+  it('Go to the Bookstore and add the book to the cart', () => {
     cy.login(user.username, user.password);
     cy.visit('/profile')
     cy.get('#gotoStore')
@@ -53,7 +53,7 @@ describe('Book Store app', () => {
     })
   });
 
-  it('', () => {
+  it('Go to your profile and remove the book from the cart', () => {
     cy.login(user.username, user.password);
     cy.visit('/profile');
     cy.contains('#item-3', 'Profile')
