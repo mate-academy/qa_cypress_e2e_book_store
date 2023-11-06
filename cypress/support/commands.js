@@ -50,10 +50,8 @@ Cypress.Commands.add('addBook', () => {
   cy.get('#gotoStore').click();
   cy.get('#searchBox').type('Speaking JavaScript');
   cy.contains('Speaking JavaScript').click();
-  cy.get('#description-label')
-    .should('contain', 'Description');
-  cy.get('#author-label')
-    .should('contain', 'Author');
+  cy.get('.col-md-9')
+    .should('contain', 'Like it or not, JavaScript is everywhere');
   cy.contains('#addNewRecordButton', 'Add To Your Collection').click();
   cy.on('window:alert', (str) => {
     expect(str).to.equal('Book added to your collection.');
