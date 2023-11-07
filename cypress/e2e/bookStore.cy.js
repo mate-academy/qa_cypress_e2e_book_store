@@ -8,7 +8,11 @@ describe('Book Store app', () => {
 
   const book = {
     title: 'Speaking JavaScript',
-    description: 'Like it or not, JavaScript is everywhere these days-from browser to server to mobile-and now you, too, need to learn the language or dive deeper than you have. This concise book guides you into and through JavaScript, written by a veteran programmer who o'
+    description: 'Like it or not, JavaScript is everywhere these days-from',
+    author: 'Axel Rauschmayer', 
+    publisher: 'O\'Reilly Media'
+
+
     }
   before(() => {
     cy.visit('/login');
@@ -34,12 +38,18 @@ describe('Book Store app', () => {
     cy.visit('/profile');
     cy.get('#gotoStore')
      .click();
+    cy.url()
+     .should('include', '/books');
     cy.get('#searchBox')
      .type(book.title);
     cy.get('[href="/books?book=9781449365035"]')
      .click();
     cy.get('#description-wrapper')
      .should('contain', book.description);
+    cy.get('#author-wrapper')
+     .should('contain', book.author);
+    cy.get('#publisher-wrapper')
+     .should('contain', book.publisher);
     cy.get('#addNewRecordButton')
      .click();
     cy.on('window:alert', (str) => {
@@ -51,6 +61,8 @@ it('should provide an ability to delete a book from a collection', () => {
   cy.login();
   cy.contains('#item-3', 'Profile')
     .click();
+  cy.url()
+    .should('include', '/profile');
   cy.contains('[role="row"]', book.title)
     .find('#delete-record-undefined')
     .click();
