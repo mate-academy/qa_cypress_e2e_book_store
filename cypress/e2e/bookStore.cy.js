@@ -14,7 +14,7 @@ beforeEach(() => {
   cy.visit("/login");
 });
 
-it("should provide the ability to login, search, add and delete book", () => {
+it("should provide the ability to login", () => {
   cy.get("#userName")
   .type(user.username);
   cy.get("#password")
@@ -25,6 +25,10 @@ it("should provide the ability to login, search, add and delete book", () => {
   .should("contain", user.username);
   cy.url()
   .should("contain", "/profile");
+  });
+  
+it("should provide the ability to login, and add the book", () => {
+  cy.login();
   cy.visit("/profile");
   cy.get("#gotoStore")
   .click({ force: true });
@@ -40,30 +44,10 @@ it("should provide the ability to login, search, add and delete book", () => {
     expect(str).to
     .equal(`Book added to your collection.`);
   });
-  // cy.visit("/profile");
-  // cy.get(".mr-2")
-  // .should("contain", book.title);
-  // cy.get("#delete-record-undefined")
-  // .click();
-  // cy.get("#closeSmallModal-ok")
-  // .click();
-  // cy.on("window:alert", (str) => {
-  //   expect(str).to
-  //   .equal(`Book deleted.`);
-  // });
+  
 });
-
-it("should provide the ability to login, search, add and delete book", () => {
-  cy.get("#userName")
-  .type(user.username);
-  cy.get("#password")
-  .type(user.password);
-  cy.get("#login")
-  .click();
-  cy.get("#userName-value")
-  .should("contain", user.username);
-  cy.url()
-  .should("contain", "/profile");
+it("should provide the ability to login, add and delete book", () => {
+  cy.login();
   cy.visit("/profile");
   cy.get("#gotoStore")
   .click({ force: true });
