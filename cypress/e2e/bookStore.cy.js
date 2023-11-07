@@ -34,7 +34,7 @@ describe('Book Store app', () => {
       .should('contain', user.username);
   });
 
-  it.only('Should provite an ability to searh for the "Speaking JavaScript" book, add to collection and delete from collection', () => {
+  it('Should be provide an ability to search for a "Speaking JavaScript" book and add to the collection', () => {
     cy.login();
     cy.visit('/profile');
     cy.get('#gotoStore')
@@ -52,6 +52,11 @@ describe('Book Store app', () => {
       .click();
     cy.on('windiw:alert', (alert) => {
       expect(alert).to.equal(alertMessage.added);
+    });
+  });
+
+  it('Should be provide an ability to delete a "Speaking JavaScript" book from the collection', () => {
+      cy.login();
     cy.contains('#item-3', 'Profile')
       .click();
     cy.contains('[role="row"]', book.title)
@@ -61,7 +66,6 @@ describe('Book Store app', () => {
       .click();
     cy.on('windiw:alert', (alert) => {
       expect(alert).to.equal(alertMessage.deleted);
-      });
+     });
     });
   });
-});
