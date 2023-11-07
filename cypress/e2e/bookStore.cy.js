@@ -27,7 +27,7 @@ it("should provide the ability to login", () => {
   .should("contain", "/profile");
   });
   
-it("should provide the ability to login, and add the book", () => {
+it("should provide the ability to add the book", () => {
   cy.login();
   cy.visit("/profile");
   cy.get("#gotoStore")
@@ -46,7 +46,7 @@ it("should provide the ability to login, and add the book", () => {
   });
   
 });
-it("should provide the ability to login, add and delete book", () => {
+it("should provide the ability to delete the book", () => {
   cy.login();
   cy.visit("/profile");
   cy.get("#gotoStore")
