@@ -12,7 +12,7 @@ describe('Book Store app', () => {
     cy.get('#userName-value').should('contain', 'alexuser');
   });
 
-  it('should add book', () => {
+  it('should add the book', () => {
     cy.login('alexuser', 'Alex777!');
     cy.get('.btn').contains('Go To Book Store').click();
     cy.url().should('contain', 'books');
@@ -30,7 +30,7 @@ describe('Book Store app', () => {
     cy.get('.rt-td').contains('Speaking JavaScript');
   });
 
-  it('should delete book', () => {
+  it('should delete the book', () => {
     cy.login('alexuser', 'Alex777!');
     cy.url().should('include', '/profile');
     cy.get('#userName-value').should('contain', 'alexuser');
