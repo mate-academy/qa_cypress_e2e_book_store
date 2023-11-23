@@ -30,7 +30,7 @@ describe('Book Store app', () => {
     cy.get('.rt-td').contains('Speaking JavaScript');
   });
 
-  it('should add book', () => {
+  it('should delete book', () => {
     cy.login('alexuser', 'Alex777!');
     cy.url().should('include', '/profile');
     cy.get('#userName-value').should('contain', 'alexuser');
