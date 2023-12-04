@@ -23,3 +23,13 @@
 //
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
+
+Cypress.Commands.add("findPlaceholder", (placeholder) => {
+  return cy.get(`[placeholder="${placeholder}"]`);
+});
+
+Cypress.Commands.add("login", (userName, password) => {
+  cy.findPlaceholder("UserName").type(userName);
+  cy.findPlaceholder("Password").type(password);
+  cy.get("#login").click();
+});
