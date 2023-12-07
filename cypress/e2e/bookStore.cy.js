@@ -32,11 +32,13 @@ describe('Book Store app', () => {
       .click();
     cy.contains('#userName-value', `${testUser.description}`)
       .should('exist');
-    cy.get('#addNewRecordButton')
+    cy.contains('#addNewRecordButton', 'Add To Your Collection')
       .click();
     cy.on('window:alert', (str) => {
       expect(str).to.equal(`Book added to your collection.`);
     });
+    cy.contains('#submit', 'Log out')
+      .click();
   });
 
   it('should let logged in user remove a book in their possesion', () => {
@@ -48,6 +50,8 @@ describe('Book Store app', () => {
       .get('#delete-record-undefined')
       .click();
     cy.get('#closeSmallModal-ok')
+      .click();
+    cy.contains('#submit', 'Log out')
       .click();
   });
 });
