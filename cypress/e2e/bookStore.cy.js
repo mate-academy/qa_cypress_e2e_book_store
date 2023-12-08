@@ -8,7 +8,7 @@ describe('Book Store app', () => {
   };
 
   it('should login user with correct test data', () => {
-    cy.visit('https://demoqa.com/login');
+    cy.visit('/login');
     cy.get('#userName')
       .type(testUser.username);
     cy.get('#password')
@@ -16,14 +16,17 @@ describe('Book Store app', () => {
     cy.get('#login')
       .click();
     cy.url()
-      .should('contain', 'https://demoqa.com/profile');
-    cy.get('#userName-value')
-      .should('contain', testUser.username);
+      .should('contain', '/profile');
+    cy.get('label')
+      .should('contain', testUser.username)
+      .should('be.visible');
+    cy.contains('#submit', 'Log out')
+      .click();
   });
 
   it('should let logged in user add a book to their collection', () => {
     cy.login(testUser.username, testUser.password);
-    cy.visit('https://demoqa.com/profile');
+    cy.visit('/profile');
     cy.contains('#item-2', 'Book Store')
       .click();
     cy.get('#searchBox')
@@ -37,18 +40,22 @@ describe('Book Store app', () => {
     cy.on('window:alert', (str) => {
       expect(str).to.equal(`Book added to your collection.`);
     });
+    cy.visit('/profile');
     cy.contains('#submit', 'Log out')
       .click();
   });
 
   it('should let logged in user remove a book in their possesion', () => {
     cy.login(testUser.username, testUser.password);
-    cy.visit('https://demoqa.com/profile');
+    cy.visit('/profile');
     cy.contains('#item-3', 'Profile')
       .click();
     cy.contains('[role="row"]', testUser.book)
       .get('#delete-record-undefined')
       .click();
+    cy.on('window:alert', (str) => {
+      expect(str).to.equal(`Book deleted.`);
+    });
     cy.get('#closeSmallModal-ok')
       .click();
     cy.contains('#submit', 'Log out')

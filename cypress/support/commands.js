@@ -12,6 +12,5 @@ Cypress.Commands.add('login', (login, password) => {
       cy.setCookie('token', response.body.token);
       cy.setCookie('userID', response.body.userId);
       cy.setCookie('expires', response.body.expires);
-      cy.setCookie('userName', response.body.username);
     });
 });
