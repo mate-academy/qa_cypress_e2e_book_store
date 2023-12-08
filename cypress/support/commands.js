@@ -24,12 +24,31 @@
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
 
-Cypress.Commands.add("findPlaceholder", (placeholder) => {
-  return cy.get(`[placeholder="${placeholder}"]`);
-});
+// Cypress.Commands.add("findPlaceholder", (placeholder) => {
+//   return cy.get(`[placeholder="${placeholder}"]`);
+// });
 
-Cypress.Commands.add("login", (userName, password) => {
-  cy.findPlaceholder("UserName").type(userName);
-  cy.findPlaceholder("Password").type(password);
-  cy.get("#login").click();
+// Cypress.Commands.add("login", (userName, password) => {
+//   cy.findPlaceholder("UserName").type(userName);
+//   cy.findPlaceholder("Password").type(password);
+//   cy.get("#login").click();
+// });
+
+Cypress.Commands.add('login', (
+  username = 'j.bravo',
+  password = 'Haslo123%') => {
+  cy.request({
+    method: 'POST',
+    url: 'https://demoqa.com/Account/v1/Login',
+    form: true,
+    body: {
+      userName: username,
+      password
+    }
+  }).then((response) => {
+    cy.setCookie('userID', response.body.userId);
+    cy.setCookie('userName', response.body.username);
+    cy.setCookie('token', response.body.token);
+    cy.setCookie('expires', response.body.expires);
+  });
 });

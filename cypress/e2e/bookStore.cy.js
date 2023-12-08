@@ -1,18 +1,25 @@
 /// <reference types='cypress' />
 
 describe("Book Store app", () => {
+  const user = {
+    username: 'j.bravo',
+    password: 'Haslo123%'
+  };
   beforeEach(() => {
-    cy.visit("/");
+    cy.visit("/login");
   });
 
   it("should be able to log in", () => {
-    cy.login("j.bravo", "Haslo123%");
+    cy.get('#userName').type(user.username);
+    cy.get('#password').type(user.password);
+    cy.get('#login').click();
     cy.url().should("include", "/profile");
     cy.get("#userName-value").should("contain", "j.bravo");
   });
 
   it("should be able to add the book", () => {
-    cy.login("j.bravo", "Haslo123%");
+    cy.login();
+    cy.visit('/profile');
     cy.get(".btn").contains("Go To Book Store").click();
     cy.url().should("contain", "books");
     cy.get("#searchBox").type("Speaking JavaScript");
@@ -32,11 +39,15 @@ describe("Book Store app", () => {
   });
 
   it("should be able to delete the book", () => {
-    cy.login("j.bravo", "Haslo123%");
+    cy.login();
+    cy.visit('/profile');
     cy.url().should("include", "/profile");
     cy.get("#userName-value").should("contain", "j.bravo");
     cy.get(".rt-td").contains("Speaking JavaScript");
     cy.get("#delete-record-undefined").click();
     cy.get("#closeSmallModal-ok").click();
+    cy.on("window:alert", (str) => {
+      expect(str).to.equal(`Book deleted.`);
+    });
   });
 });
