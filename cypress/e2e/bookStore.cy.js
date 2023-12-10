@@ -21,11 +21,10 @@ describe('Book Store app', () => {
   });
 
   it('should add book to user profiler', () => {
-    cy.deletedBook('89921312', cy.getCookie('userID').value);
-
     cy.visit('/login');
-    cy.deletedBook('89921312', cy.getCookie('userID').value);
     cy.login(user);
+    cy.deletedBook('9781449365035');
+    cy.getCookie('userID').value();
     cy.get('.menu-list').contains('Book Store').click();
     // cy.visit('/books');
     cy.url().should('contains', '/books');
