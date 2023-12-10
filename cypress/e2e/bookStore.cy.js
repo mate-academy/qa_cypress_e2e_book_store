@@ -3,12 +3,12 @@
 describe('Book Store app', () => {
     const user = {
       username: 'antkiew',
-      password: 'Testing123!'
+      password: 'Testing123!',
     }
     const book = {
       title: 'Speaking JavaScript',
       description: 'Like it or not, JavaScript is everywhere these days-from browser',
-      isbn: '9781449365035'
+      isbn: '9781449365035',
     }
 
   it('should login user with valid data', () => {
@@ -43,7 +43,7 @@ describe('Book Store app', () => {
     cy.visit('/profile');
     cy.get('a').contains(book.title).should('exist');  
     //Delete the book from collection (Can't be added twice)
-    cy.deleteBook('9781449365035', cy.getCookie('userID')); 
+    cy.deleteBook('9781449365035'); 
 
  })
 });
