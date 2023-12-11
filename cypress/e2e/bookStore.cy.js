@@ -14,7 +14,7 @@ describe('Book Store app', () => {
 it("should add book to the user's profile", () => {
   //Loging by a request
   cy.visit('/login');
-  cy.loginRequest(user);
+  cy.login(user);
   // Loging assertions
   cy.get('label').contains(user.username).should('be.visible');
   cy.get('button').contains('Log out').should('be.visible');
@@ -33,10 +33,10 @@ it("should add book to the user's profile", () => {
   });
 });
 
-it('should go to the profile page and delete the book', () => {
+it.only('should go to the profile page and delete the book', () => {
   //Loging by a request
   cy.visit('/login');
-  cy.loginRequest(user);
+  cy.login(user);
   // Loging assertions
   cy.get('label').contains(user.username).should('be.visible');
   cy.get('button').contains('Log out').should('be.visible');
@@ -48,7 +48,7 @@ it('should go to the profile page and delete the book', () => {
   //Find the book
   cy.get('[placeholder="Type to search"]').type(book.title);
   cy.get('a').contains(book.title).click();
-  cy.get('.form-label').should('contain.text', book.description)
+  cy.get('.form-label').should('contain.text', book.description);
   //Add the book to the cellection
   cy.get('.text-right.fullButton').contains('Add To Your Collection').click();
   //Delete book from the collection

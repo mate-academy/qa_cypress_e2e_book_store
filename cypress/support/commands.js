@@ -24,7 +24,7 @@
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
 
-const { values } = require("cypress/types/lodash");
+// const { values } = require("cypress/types/lodash");
 
 Cypress.Commands.add('login', user => {
     cy.request('POST', 'https://demoqa.com/Account/v1/Login', {
@@ -38,30 +38,5 @@ Cypress.Commands.add('login', user => {
     });
 });
 
-Cypress.Commands.add('deleteBook', (isbnToDelete) => {
-    cy.request({
-        method: 'DELETE',
-        url: 'https://demoqa.com/BookStore/v1/Book',
-        headers: {
-            accept: 'application/json',
-            authorization: `Bearer `,
-        },
-        body: {
-            isbn: isbnToDelete,
-            userId: '0e4bde91-b266-42c8-8fc2-27d1ff67ec7c',
-        },
-    }).then((response) => {
-        expect(response.status).to.equal('204');
-    });
-});
 
 
-
-// Cypress.Commands.add('deleteBook', (isbnToDelete,userId) => {
-//     cy.request('DELETE', 'https://demoqa.com/BookStore/v1/Book', {
-//         isbn: isbnToDelete,
-//         userId: userId,
-//     }).then((response) => {
-//         expect(response.status).to.equal('204');
-//     });
-// });
