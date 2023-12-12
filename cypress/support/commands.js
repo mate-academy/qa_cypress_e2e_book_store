@@ -26,7 +26,7 @@
 
 // const { values } = require("cypress/types/lodash");
 
-Cypress.Commands.add('login', user => {
+Cypress.Commands.add('login', (user) => {
     cy.request('POST', 'https://demoqa.com/Account/v1/Login', {
         userName: user.username,
         password: user.password,
