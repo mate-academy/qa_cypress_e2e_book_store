@@ -2,6 +2,11 @@ const { defineConfig } = require('cypress');
 
 module.exports = defineConfig({
   e2e: {
+    baseUrl: 'https://demoqa.com/',
+    viewportHeight: 1500,
+    viewportWidth: 1400,
+    responseTimeout: 6000,
+    watchForFileChanges: false,
     setupNodeEvents(on, config) {
     }
   }
