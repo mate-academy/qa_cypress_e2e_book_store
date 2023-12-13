@@ -1,10 +1,6 @@
 /// <reference types='cypress' />
 
 describe('Book Store app', () => {
-  beforeEach(() => {
-
-  });
-
   it('should add and remove book', () => {
     // login
     cy.visit('/login');
@@ -36,6 +32,8 @@ describe('Book Store app', () => {
     cy.get('[href="/profile?book=9781449365035"]').should('exist');
     cy.get('[title="Delete"]').click();
     cy.get('#closeSmallModal-ok').contains('OK').click();
+    cy.reload();
+    cy.get('#books-wrapper').should('not.contain', 'Speaking Javascript');
 
     // cy.on('window:alert', (str) => {
     //   expect(str).to.equal(`Book deleted.`);
