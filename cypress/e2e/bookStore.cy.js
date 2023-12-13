@@ -2,25 +2,17 @@
 
 describe('Book Store app', () => {
   beforeEach(() => {
-    cy.visit('/login');
+    cy.visit('/');
+    cy.login();
+    cy.visit('/profile');
   });
 
   it('should log in existing user', () => {
-    cy.get('#userName')
-      .type('testingagain');
-    cy.get('#password')
-      .type('Testingagain123$');
-    cy.get('#login')
-      .click();
-    cy.url()
-      .should('include', '/profile');
     cy.get('#userName-value')
       .should('contain', 'testingagain');
   });
 
   it('should add a book', () => {
-    cy.login();
-    cy.visit('/profile');
     cy.get('#gotoStore')
       .click();
     cy.get('#searchBox')
@@ -40,8 +32,6 @@ describe('Book Store app', () => {
   });
 
   it('should delete book', () => {
-    cy.login();
-    cy.visit('/profile');
     cy.get('.menu-list')
       .contains('Profile')
       .click();
@@ -51,5 +41,8 @@ describe('Book Store app', () => {
       .click();
     cy.get('#closeSmallModal-ok')
       .click();
+    cy.on('window:alert', (alert) => {
+      expect(alert).to.equal('Book deleted.');
+    });
   });
 });
