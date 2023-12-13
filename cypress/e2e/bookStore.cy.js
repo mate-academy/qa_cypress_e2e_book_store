@@ -33,7 +33,7 @@ it("should add book to the user's profile", () => {
 })
 });
 
-it.only('should go to the profile page and delete the book', () => {
+it('should go to the profile page and delete the book', () => {
   //Loging by a request
   cy.visit('/login');
   cy.login(user);
