@@ -6,7 +6,6 @@ describe('Book Store app', () => {
     password: 'Matest123!'
   };
   const book = {
-    isbn: '9781449365035',
     title: 'Speaking JavaScript'
   };
 
