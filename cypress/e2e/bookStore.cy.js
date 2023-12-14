@@ -41,8 +41,8 @@ describe('Book Store app', () => {
     // Delete book from list
     cy.findByAttribute('id', 'delete-record-undefined').click();
     cy.findByAttribute('id', 'closeSmallModal-ok').contains('OK').click();
-    // cy.on('window:alert', (str) => {
-    //   expect(str).to.equal(`Book deleted.`);
-    // });
+    cy.on('window:alert', (str) => {
+      expect(str).to.equal(`Book deleted.`);
+    });
   });
 });
