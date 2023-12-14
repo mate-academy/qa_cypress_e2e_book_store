@@ -1,4 +1,5 @@
 /// <reference types='cypress' />
+
 describe('Book Store app', () => {
   const testUser = {
     username: 'wojtasck',
@@ -31,9 +32,9 @@ describe('Book Store app', () => {
       .click();
     cy.get('#searchBox')
       .type(testUser.book);
-    cy.contains('a', `${testUser.book}`)
+    cy.contains('a', testUser.book)
       .click();
-    cy.contains('#userName-value', `${testUser.description}`)
+    cy.contains('#userName-value', testUser.description)
       .should('exist');
     cy.contains('#addNewRecordButton', 'Add To Your Collection')
       .click();
@@ -41,6 +42,8 @@ describe('Book Store app', () => {
       expect(str).to.equal(`Book added to your collection.`);
     });
     cy.visit('/profile');
+    cy.contains('[role="row"]', testUser.book)
+      .should('exist');
     cy.contains('#submit', 'Log out')
       .click();
   });
