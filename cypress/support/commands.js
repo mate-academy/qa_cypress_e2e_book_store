@@ -23,3 +23,15 @@
 //
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
+Cypress.Commands.add('findByPlaceholder', (placeholder, tag = 'input') => {
+    cy.get(`${tag}[placeholder='${placeholder}']`);
+});
+
+Cypress.Commands.add('deleteBook', (title) => {
+    cy.get('.rt-table').should('contain', title);
+    cy.get('#delete-record-undefined').click();
+    cy.get('#closeSmallModal-ok').click();
+    cy.on('window:alert', (str) => {
+        expect(str).to.equal(`Book deleted.`);
+    });
+});  
