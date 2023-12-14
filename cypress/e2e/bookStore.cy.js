@@ -24,12 +24,15 @@ describe('Book Store app', () => {
     cy.get('a').contains(bookTitle).click();
     cy.get('#description-wrapper').contains('Description :').should('exist');
     cy.get('button').contains('Add To Your Collection').click();
-    cy.once('window:alert', (str) => {
+    cy.on('window:alert', (str) => {
       expect(str).to.equal(`Book added to your collection.`);
     });
     cy.get('.left-pannel').contains('Profile').click();
     cy.get('.rt-tbody').contains(bookTitle).should('exist');
     cy.get('.rt-tr').contains(bookTitle).get('[title="Delete"]').click();
     cy.get('button').contains('OK').click();
+    // cy.on('window:alert', (str) => {
+    //   expect(str).to.equal(`Book deleted.`);
+    // });
   });
 });

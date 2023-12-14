@@ -26,10 +26,3 @@
 Cypress.Commands.add('findByPlaceholder', (placeholder, tag = 'input') => {
   cy.get(`${tag}[placeholder="${placeholder}"]`);
 });
-
-Cypress.Commands.add(
-  'login',
-  (username = 'Testowy_1', password = '!QAZxsw2') => {
-    cy.visit('/login');
-  }
-);
