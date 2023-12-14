@@ -2,12 +2,10 @@
 
 describe('Book store app', () => {
   before(() => {
-    cy.visit('https://demoqa.com/register');
+    cy.visit('https://demoqa.com/login');
   });
 
   it('should test the book store website', () => {
-    // back to login
-    cy.get('#gotologin').click();
     // login
     cy.get('input[placeholder="UserName"]').type('PanJan');
     cy.get('input[placeholder="Password"]').type('Passw0rd!');
@@ -36,5 +34,6 @@ describe('Book store app', () => {
     // delete book from cart
     cy.get('#delete-record-undefined').click();
     cy.get('#closeSmallModal-ok').click();
+    cy.reload();
   });
 });
