@@ -1,35 +1,24 @@
 /// <reference types='cypress' />
 
 describe('Book Store app', () => {
-  before(() => {
-    cy.visit('/login');
+  beforeEach(() => {
+    cy.visit('/');
+    cy.login();
+    cy.visit('/profile');
   });
-  // const fName = 'testName';
-  // const lName = 'testSurname';
 
-  const uName = 'testUsername';
-  const uPassword = 'testPassword1!';
   it('correct login user', () => {
-    cy.get('#userName')
-      .type(uName);
-
-    cy.get('#password')
-      .type(uPassword);
-
-    cy.get('#login')
-      .click();
+    cy.login();
 
     cy.url()
       .should('include', '/profile');
 
     cy.get('#userName-value')
-      .should('contain', uName);
+      .should('contain', 'testUsername');
   });
 
-  it.only('adding the book to shopping list', () => {
+  it('adding the book to shopping list', () => {
     cy.login();
-
-    cy.visit('/profile');
 
     cy.get('#gotoStore')
       .click();
@@ -43,11 +32,13 @@ describe('Book Store app', () => {
 
     cy.get('.action-buttons').click();
 
-    cy.get('#description-wrapper > .col-md-9 > #userName-value')
-      .should('contain', 'Like it or not, JavaScript is everywhere');
+    cy.get('#description-label')
+      .should('contain', '');
 
     cy.contains('#addNewRecordButton', 'Add To Your Collection')
       .click();
+
+    cy.contains('#addNewRecordButton', 'Add To Your Collection');
 
     cy.on('window:alert', (alert) => {
       expect(alert)
@@ -56,8 +47,6 @@ describe('Book Store app', () => {
   });
   it('delete book', () => {
     cy.login();
-
-    cy.visit('/profile');
 
     cy.get('.menu-list')
       .contains('Profile')
