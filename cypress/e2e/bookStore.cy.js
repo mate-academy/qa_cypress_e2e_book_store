@@ -25,7 +25,6 @@ describe('Book Store app', () => {
   });
 
   it('should provide an ability to add book to the cart', () => {
-    cy.visit('/login');
     cy.login(user);
     cy.visit('/profile');
     cy.get('.menu-list').contains('Book Store').click();
@@ -33,12 +32,15 @@ describe('Book Store app', () => {
     cy.findByPlaceholder('Type to search').type(book.title);
     cy.get('a').contains(book.title).click();
     cy.get('button').contains('Add To Your Collection').click();
+    cy.on('window:alert', (str) => {
+      expect(str).to.equal(`Book added to your collection.`)
+  })
     cy.visit('/profile');
     cy.get('a').contains(book.title).should('exist');
+    cy.get('a').should('contain', book.title);
   });
 
   it('should provide an ability to delete book from the cart', () => {
-    cy.visit('/login');
     cy.login(user);
     cy.visit('/profile');
     cy.get('#delete-record-undefined').click();
