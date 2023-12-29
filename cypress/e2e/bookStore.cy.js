@@ -5,71 +5,39 @@ describe('Book Store app', () => {
     username: 'nazar552',
     password: 'Nazar5522@'
   };
-  it('shold login user', () => {
+  it('should login the user', () => {
     cy.visit('/login')
-    cy.get('input[placeholder="UserName"]').type('nazar552');
-    cy.get('input[placeholder="Password"]').type('Nazar5522@')
+    cy.get('input[placeholder="UserName"]').type(user.username);
+    cy.get('input[placeholder="Password"]').type(user.password)
     cy.get('#login').click()
-    cy.get('#userName-value').should('contain.text', 'nazar552');
+    cy.get('#userName-value').should('contain.text', user.username);
     cy.url().should('contain', 'profile');
-    // cy.get('span.text').contains('Book Store').click();
-    // cy.get('input[placeholder="Type to search"]').type('Speaking JavaScript');
-    // cy.get('a').contains('JavaScript').click();
-    // cy.get('.form-label').should('contain.text', 'Speaking JavaScript');
-    // cy.get('.text-right > #addNewRecordButton').click()
-    // cy.on('window:alert', (str) => {
-    //   if (str.includes('added')) {
-    //     expect(str).to.equal('Book added to your collection.');
-    //   } else if (str.includes('deleted')) {
-    //     expect(str).to.equal('Book deleted.');
-    //   } else {
-    //     cy.log(`Unexpected alert message: ${str}`);
-    //   }
-    // });
-    // cy.get('span.text').contains('Profile').click();
-    // cy.get('a').should('contain.text', 'JavaScript')
-    // cy.get('#delete-record-undefined').click();
-    // cy.get('#closeSmallModal-ok').click();
   });
 
-  it('should add book', () => {
+  it('should provide ability to add the book to the colletion', () => {
     
     cy.login(user);
     cy.visit('/books');
-    cy.get('#userName-value').should('contain.text', 'nazar552');
     cy.url().should('contain', 'books');
     cy.get('span.text').contains('Book Store').click();
     cy.get('input[placeholder="Type to search"]').type('Speaking JavaScript');
     cy.get('a').contains('JavaScript').click();
     cy.get('.form-label').should('contain.text', 'Speaking JavaScript');
     cy.get('.text-right > #addNewRecordButton').click()
-    cy.on('window:alert', (str) => {
-      if (str.includes('added')) {
-        expect(str).to.equal('Book added to your collection.');
-      } else if (str.includes('deleted')) {
-        expect(str).to.equal('Book deleted.');
-      } else {
-        cy.log(`Unexpected alert message: ${str}`);
-      }
-    });
+    cy.alertBookAdded();
+    cy.visit('/profile');
+    cy.get('a').should('contain.text', 'Speaking JavaScript');
   });
 
-  it('should delete book', () => {
+  it('should provide ability to delete the book from the colletion', () => {
     
     cy.login(user);
     cy.visit('/profile');
-    cy.get('#userName-value').should('contain.text', 'nazar552');
     cy.url().should('contain', 'profile');
     cy.get('#delete-record-undefined').click();
     cy.get('#closeSmallModal-ok').click();
-    cy.on('window:alert', (str) => {
-      if (str.includes('added')) {
-        expect(str).to.equal('Book added to your collection.');
-      } else if (str.includes('deleted')) {
-        expect(str).to.equal('Book deleted.');
-      } else {
-        cy.log(`Unexpected alert message: ${str}`);
-      }
-    });
+    cy.alertBookDeleted();
+    cy.get('a').should('not.contain.text', 'Speaking JavaScript');
+
   });
 });

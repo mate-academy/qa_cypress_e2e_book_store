@@ -34,3 +34,15 @@ Cypress.Commands.add('login', (user) => {
     cy.setCookie('userName', response.body.username);
   });
 });
+
+Cypress.Commands.add('alertBookAdded', () => {
+  cy.on('window:alert', (str) => {
+    expect(str).to.equal(`Book added to your collection.`)
+})
+});
+
+Cypress.Commands.add('alertBookDeleted', () => {
+  cy.on('window:alert', (str) => {
+    expect(str).to.equal(`Book deleted.`)
+})
+});
