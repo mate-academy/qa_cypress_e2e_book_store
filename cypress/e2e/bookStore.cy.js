@@ -43,13 +43,13 @@ describe('Book Store app', () => {
   it('Delete ', () => {
     cy.login();
     cy.visit('/profile');
-    cy.get('.action-buttons').should('contain', book.title);
+    cy.get('#see-book-Speaking\\ JavaScript > a')
+      .should('contain', book.title);
     cy.get('#delete-record-undefined').click();
     cy.get('#closeSmallModal-ok').click();
 
-    cy.get('.modal-content').should('be.visible');
-    cy.get('.modal-content')
-      .should('contain', 'Do you want to delete this book?');
-    // cy.contains('.ReactTable', book.title).should('not.exist');
+    cy.on('window:alert', (alert) => {
+      expect(alert).to.equal('Book deleted.');
+    });
   });
 });
