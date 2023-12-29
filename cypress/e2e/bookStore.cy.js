@@ -20,7 +20,7 @@ describe('Book Store app', () => {
     cy.get('#login').click();
     cy.get('#userName-value').should('contain', user.username);
     cy.url().should('include', '/profile');
-    cy.visit('/books');
+    cy.get('#gotoStore').click();
     cy.get('#searchBox').type('Speaking JavaScript');
     cy.get('a').contains(book.title).click();
     cy.get('#description-wrapper').should('contain', book.description);
@@ -28,7 +28,7 @@ describe('Book Store app', () => {
     cy.on('window:alert', (str) => {
       expect(str).to.equal(`Book added to your collection.`);
     });
-    cy.visit('/profile');
+    cy.get('#item-3 .text').contains('Profile').click();
     cy.get('.ReactTable').should('contain', 'Speaking JavaScript');
     cy.get('#delete-record-undefined').click();
     cy.get('#closeSmallModal-ok').click();
