@@ -31,5 +31,7 @@ describe('Book Store app', () => {
     cy.get('span.text').contains('Profile').click();
     cy.get('#delete-record-undefined').click();
     cy.get('#closeSmallModal-ok').click();
+    cy.reload();
+    cy.get('.rt-td').should('not.have.text', 'Product in cart');
   });
 });
