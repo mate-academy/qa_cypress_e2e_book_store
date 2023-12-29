@@ -23,11 +23,11 @@ describe('Book Store app', () => {
     cy.get('#searchBox').type('Speaking JavaScript');
     cy.get('a[href="/books?book=9781449365035"]').click();
     cy.get('#description-wrapper').should('contain', book.descreption);
-    cy.get('.text-right > #addNewRecordButton').click();
+    cy.contains('#addNewRecordButton', 'Add To Your Collection').click();
     cy.on('window:alert', (str) => {
       expect(str).to.equal(`Book added to your collection.`);
     });
-    cy.get(':nth-child(6) > .element-list > .menu-list > #item-3').click();
+    cy.get('#item-3 .text').contains('Profile').click();
     cy.get('.ReactTable').should('contain', 'Speaking JavaScript');
     cy.get('#delete-record-undefined').click();
     cy.get('#closeSmallModal-ok').click();
