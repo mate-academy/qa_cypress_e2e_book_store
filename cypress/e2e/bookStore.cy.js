@@ -1,6 +1,9 @@
 /// <reference types='cypress' />
-const UserName = 'TestUser048';
-const Password = 'Qwerty01!';
+const user = {
+  UserName: 'TestUser048',
+  Password: 'Qwerty01!'
+};
+
 const book = {
   title: 'Speaking JavaScript',
   author: 'Axel Rauschmayer',
@@ -12,16 +15,16 @@ describe('Book Store app', () => {
   it('should have an ability to log in', () => {
     cy.visit('/login');
     cy.get('#userName')
-      .type(UserName);
+      .type(user.UserName);
     cy.get('#password')
-      .type(Password);
+      .type(user.Password);
     cy.get('#login')
       .click();
-    cy.contains('#userName-value', UserName);
+    cy.contains('#userName-value', user.UserName);
     cy.url().should('eq', 'https://demoqa.com/profile');
   });
 
-  it.only('should navigate to BookStore', () => {
+  it('should have an ability to add books', () => {
     cy.login();
     cy.visit('/books');
     cy.get('#searchBox')
@@ -38,6 +41,10 @@ describe('Book Store app', () => {
     cy.on('window:alert', (str) => {
       expect(str).to.equal(`Book added to your collection.`);
     });
+  });
+
+  it('should have an ability to delete books', () => {
+    cy.login();
     cy.visit('/profile');
     cy.contains('[role="row"]', book.title)
       .should('contain', book.author)
