@@ -33,15 +33,3 @@ Cypress.Commands.add('findByPlaceholder', (placeholder, tag = 'input') => {
   // znajdź(`taki tag dla którego {placeholder} został podany`)
   cy.get(`${tag}[placeholder="${placeholder}"]`);
 });
-// Cypress.Commands.add('login', (username, password) => {
-//   cy.visit('/login');
-//   cy.findByPlaceholderText('UserName').type(username);
-//   cy.findByPlaceholderText('Password').type(password);
-//   cy.get('button').contains('Login').click();
-// });
-Cypress.Commands.add('login', (username, password) => {
-  cy.visit('/login');
-  cy.findByPlaceholderText('UserName').type(username);
-  cy.findByPlaceholderText('Password').type(password);
-  cy.get('button').contains('Login').click();
-});
