@@ -42,6 +42,7 @@ describe('Book Store app', () => {
     cy.on('window:alert', (str) => {
       expect(str).to.equal(`Book added to your collection.`, { timeout: 10000 });
     });
+    cy.visit('/profile');
   });
   it('should delete book from profile', () => {
     cy.login();
