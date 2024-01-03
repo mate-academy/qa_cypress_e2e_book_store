@@ -6,6 +6,7 @@ describe('Book Store app', () => {
   };
 
   const book = {
+    title: 'Speaking JavaScript',
     description: 'Like it or not, JavaScript is everywhere'
   };
 
@@ -19,12 +20,12 @@ describe('Book Store app', () => {
     cy.get('#login').click();
     cy.url().should('include', '/profile');
     cy.get('#gotoStore').click();
-    cy.get('#searchBox').type('Speaking JavaScript');
-    cy.get('a[href="/books?book=9781449365035"]').click();
+    cy.get('#searchBox').type(book.title);
+    cy.get('[id="see-book-Speaking JavaScript"]').click();
     cy.get('#description-wrapper').should('contain', book.description);
     cy.contains('#addNewRecordButton', 'Add To Your Collection').click();
     cy.on('window:alert', (str) => {
-      expect(str).to.equal('Book added to your collection.git');
+      expect(str).to.equal('Book added to your collection.');
     });
     cy.get('#item-3 .text').contains('Profile').click();
     cy.get('.ReactTable').should('contain', 'Speaking JavaScript');
