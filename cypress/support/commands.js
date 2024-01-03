@@ -1,3 +1,4 @@
+/// <reference types='cypress' />
 // ***********************************************
 // This example commands.js shows you how to
 // create various custom commands and overwrite
@@ -23,3 +24,19 @@
 //
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
+
+Cypress.Commands.add('login', (username, password) => {
+  cy.request({
+    method: 'POST',
+    url: 'https://demoqa.com/Account/v1/Login', // baseUrl is prepend to URL
+    body: {
+      userName: 'AH',
+      password: 'P@s$w0rd'
+    }
+  }).then((response) => {
+    cy.setCookie('token', response.body.token);
+    cy.setCookie('expires', response.body.expires);
+    cy.setCookie('userID', response.body.userId);
+    cy.setCookie('userName', response.body.username);
+  });
+});
