@@ -50,5 +50,11 @@ describe('Book Store app', () => {
     cy.on('window:alert', (str) => {
       expect(str).to.equal(`Book deleted.`);
     });
+    cy.visit('/books');
+    cy.get('#searchBox').type(book.title);
+    cy.get('a').contains(book.title).click();
+
+    cy.get('.text-right').should('contain',
+      'Add To Your Collection');
   });
 });
