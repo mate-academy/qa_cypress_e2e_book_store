@@ -15,7 +15,7 @@ describe('Book Store app', () => {
     cy.findByPlaceholder('Password').type(user.password);
     cy.get('#login').click();
     cy.url().should('contain', '/profile');
-    cy.get('#userName-value').should('contain', user.userName);
+    cy.get('#userName-value').should('contain', user.firstName);
     cy.get('#gotoStore').click();
     cy.findByPlaceholder('Type to search').type('Speaking JavaScript');
     cy.get('.action-buttons').click();
@@ -24,12 +24,12 @@ describe('Book Store app', () => {
     cy.get('#description-wrapper')
       .should('contain', 'Like it or not, JavaScript is everywhere');
     cy.get('.text-right.fullButton').click();
-    cy.on('window:alert', (str) => {
-      expect(str).to.equal(`Book added to your collection.`);
-    });
-    cy.visit('/profile');
+    cy.CheckBookAdded();
+    cy.contains('Profile').click();
     cy.get('.action-buttons').should('contain', 'Speaking JavaScript');
     cy.get('#delete-record-undefined').click();
     cy.get('#closeSmallModal-ok').click();
+    cy.CheckDeleteAlert();
+    cy.contains('rt-td', 'Speaking JavaScript').should('not.exist');
   });
 });

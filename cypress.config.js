@@ -12,8 +12,8 @@ module.exports = defineConfig({
           return {
             firstName: 'Shanti',
             lastName: 'Shantihi',
-            userName: 'Shanti',
-            password: 'Gthtvjuf24'
+            userName: 'shanti',
+            password: 'Gthtvjuf24!'
           };
         }
       });
