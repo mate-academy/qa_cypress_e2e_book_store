@@ -8,7 +8,8 @@ describe("Book Store app", () => {
     //comment for updating PR
   });
 
-  it("basic test", () => {
+  it("basic test with minor changes for approval flow", () => {
+    
     cy.get("#searchBox").type("Git Pocket Guide{enter}");
     cy.get("#see-book-Git Pocket Guide").click();
     cy.get("#addNewRecordButton").click();
