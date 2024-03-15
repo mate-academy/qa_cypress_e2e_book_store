@@ -20,6 +20,7 @@ describe('Book Store app', () => {
 
     cy.login(username, password);
     cy.visit('/books');
+    cy.get('#userName-value').should('contain.text', username);
     cy.get('#searchBox').type(bookName);
     cy.get('[href="/books?book=9781449365035"]')
       .should('contain.text', bookName);
