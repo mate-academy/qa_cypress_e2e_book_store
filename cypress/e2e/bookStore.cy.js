@@ -20,7 +20,7 @@ describe('Book Store app', () => {
     cy.url().should('include', 'https://demoqa.com/profile');
   });
 
-  it('should provide ability to log in', () => {
+  it('should provide ability to search', () => {
     cy.login(username, password);
 
     cy.visit('/books');
