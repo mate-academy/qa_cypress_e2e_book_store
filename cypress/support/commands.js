@@ -25,7 +25,7 @@
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
 
 // const { userData } = require('../support/userData');
-Cypress.Commands.add('Login', () => {
+Cypress.Commands.add('login', () => {
   cy.request({
     method: 'POST',
     url: 'https://demoqa.com/Account/v1/Login',
