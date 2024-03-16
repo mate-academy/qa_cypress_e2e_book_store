@@ -12,7 +12,7 @@ describe('Book Store app', () => {
     cy.get('#password').type(user.password);
     cy.get('#login').click();
 
-    cy.get('#userName-value').should('contain.text', 'xanepulas');
+    cy.get('#userName-value').should('contain.text', user.username);
     cy.url().should('include', '/profile');
   });
   it('should allow to search for the book', () => {
