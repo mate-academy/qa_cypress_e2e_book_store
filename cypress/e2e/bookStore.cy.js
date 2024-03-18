@@ -5,7 +5,6 @@ describe('Book Store app', () => {
     username: 'Flood',
     password: 'qwert!Q12345',
     textForSearching: 'Speaking JavaScript',
-    title: 'Speaking JavaScript',
     author: 'Axel Rauschmayer',
     publisher: "O'Reilly Media"
   };
@@ -27,7 +26,7 @@ describe('Book Store app', () => {
     cy.visit('/books');
     cy.get('#searchBox')
       .type(user.textForSearching);
-    cy.contains('a[href="/books?book=9781449365035"]', user.title)
+    cy.contains('a[href="/books?book=9781449365035"]', user.textForSearching)
       .should('exist');
     cy.contains('.rt-td', user.author)
       .should('exist');
