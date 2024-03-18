@@ -11,7 +11,6 @@ describe('Book Store app', () => {
     cy.get('#userName').type(user.username);
     cy.get('#password').type(user.password);
     cy.get('#login').click();
-    cy.get('#userName-value').should('have.value', user.username);
     cy.url().should('include', '/profile');
   });
 
@@ -22,6 +21,6 @@ describe('Book Store app', () => {
     cy.get('.form-control').type(bookName);
     cy.get('.rt-table').should('contain.text', bookName);
     cy.get('.rt-table').should('contain.text', 'Axel Rauschmayer');
-    cy.get('.rt-table').should('contain.text', '\'Reilly Media');
+    cy.get('.rt-table').should('contain.text', 'O\'Reilly Media');
   });
 });

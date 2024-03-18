@@ -29,8 +29,9 @@ Cypress.Commands.add('login', (username, password) => {
     method: 'POST',
     url: 'https://demoqa.com/Account/v1/Login',
     body: {
-      userName: 'username',
-      password: 'password'
+      userName: username,
+      // eslint-disable-next-line object-shorthand
+      password: password
     }
   }).then((response) => {
     cy.setCookie('token', response.body.token);
