@@ -11,6 +11,7 @@ describe('Book Store app', () => {
     cy.get('#userName').type(user.username);
     cy.get('#password').type(user.password);
     cy.get('#login').click();
+    cy.get('#userName-value').should('have.text', user.username);
     cy.url().should('include', '/profile');
   });
 
