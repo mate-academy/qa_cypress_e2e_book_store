@@ -22,18 +22,21 @@ describe('Book Store app', () => {
 
   it('should provide ability to search', () => {
     cy.login(username, password);
+    const bookName = 'Speaking JavaScript';
+    const author = 'Axel Rauschmayer';
+    const publisher = 'O\'Reilly Media';
 
     cy.visit('/books');
 
-    cy.get('#searchBox').type('Speaking JavaScript{enter}');
+    cy.get('#searchBox').type(`${bookName}{enter}`);
 
     cy.get('.mr-2')
-      .should('contain.text', 'Speaking JavaScript');
+      .should('contain.text', bookName);
 
     cy.get('.rt-td')
-      .should('contain.text', 'Axel Rauschmayer');
+      .should('contain.text', author);
 
     cy.get('.rt-td')
-      .should('contain.text', 'O\'Reilly Media');
+      .should('contain.text', publisher);
   });
 });
