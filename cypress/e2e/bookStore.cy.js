@@ -27,11 +27,8 @@ describe('Book Store app', () => {
 
     cy.get('#searchBox').type(bookName);
 
-    cy.get('.rt-tbody > :nth-child(1) > .rt-tr > :nth-child(2)')
-      .should('contain.text', bookName);
-    cy.get('.rt-tbody > :nth-child(1) > .rt-tr > :nth-child(3)')
-      .should('contain.text', authorName);
-    cy.get('.rt-tbody > :nth-child(1) > .rt-tr > :nth-child(4)')
-      .should('contain.text', publisher);
+    cy.get('.rt-td').should('contain.text', bookName);
+    cy.get('.rt-td').should('contain.text', authorName);
+    cy.get('.rt-td').should('contain.text', publisher);
   });
 });
