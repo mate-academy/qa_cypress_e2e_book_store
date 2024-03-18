@@ -3,7 +3,11 @@
 describe('Book Store app', () => {
   const user = {
     username: 'Flood',
-    password: 'qwert!Q12345'
+    password: 'qwert!Q12345',
+    textForSearching: 'Speaking JavaScript',
+    title: 'Speaking JavaScript',
+    author: 'Axel Rauschmayer',
+    publisher: "O'Reilly Media"
   };
 
   it('should provide an ability to login', () => {
@@ -22,12 +26,12 @@ describe('Book Store app', () => {
     cy.login();
     cy.visit('/books');
     cy.get('#searchBox')
-      .type('Speaking JavaScript');
-    cy.contains('a[href="/books?book=9781449365035"]', 'Speaking JavaScript')
+      .type(user.textForSearching);
+    cy.contains('a[href="/books?book=9781449365035"]', user.title)
       .should('exist');
-    cy.contains('.rt-td', 'Axel Rauschmayer')
+    cy.contains('.rt-td', user.author)
       .should('exist');
-    cy.contains('.rt-td', "O'Reilly Media")
+    cy.contains('.rt-td', user.publisher)
       .should('exist');
   });
 });
