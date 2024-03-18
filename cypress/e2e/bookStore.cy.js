@@ -4,6 +4,7 @@ describe('Book Store app', () => {
     username: 'qa_jan24',
     password: '12345Qwert!'
   };
+  const book = 'Speaking JavaScript';
 
   it('should Log in a user', () => {
     cy.visit('/login');
@@ -16,12 +17,12 @@ describe('Book Store app', () => {
   });
 
   it('should search the book', () => {
-    cy.login();
+    cy.login(user.username, user.password);
     cy.visit('/profile');
     cy.contains('#item-2', 'Book Store').click();
-    cy.get('#searchBox').type(`Speaking JavaScript{enter}`);
+    cy.get('#searchBox').type(book, `{enter}`);
     cy.get('[href="/books?book=9781449365035"]')
-      .should('contain', 'Speaking JavaScript');
+      .should('contain', book);
     cy.get('.rt-td, .gridcell').should('contain', 'Axel Rauschmayer');
     cy.get('.rt-td, .gridcell').should('contain', `O'Reilly Media`);
   });
