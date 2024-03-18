@@ -23,7 +23,7 @@ describe('Book Store app', () => {
   });
 
   it('should allow to search for the book', () => {
-    cy.login();
+    cy.login(user.username, user.password);
     cy.visit('/books');
     cy.get('#searchBox')
       .type(user.textForSearching);

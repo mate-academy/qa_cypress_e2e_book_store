@@ -25,13 +25,13 @@
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
 import './commands';
 
-Cypress.Commands.add('login', () => {
+Cypress.Commands.add('login', (username, password) => {
     cy.request({
         method: 'POST',
         url: 'https://demoqa.com/Account/v1/Login',
         body: {
-            userName: 'Flood',
-            password: 'qwert!Q12345'
+            userName: username,
+            password: password
         },
     }).then((response) => {
         cy.setCookie('token', response.body.token);
