@@ -1,7 +1,7 @@
 /// <reference types='cypress' />
 
 const user = {
-  username: 'TetiMaksiuk',
+  username: 'Anatolii Tsimbaliuk',
   password: 'Qwert12345!',
 };
 
