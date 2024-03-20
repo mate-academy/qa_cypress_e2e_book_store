@@ -23,21 +23,21 @@
 //
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
-Cypress.Commands.add('findById', (id) => {
+Cypress.Commands.add('findBySelector', (id) => {
   cy.get(`#${id}`);
 });
 
-Cypress.Commands.add('clickButton', (id) => {
-  cy.findById(id).click();
+Cypress.Commands.add('clickOnButton', (id) => {
+  cy.findBySelector(id).click();
 });
 
-Cypress.Commands.add('loginViaUi', (username, password, buttonId) => {
-  cy.findById('userName').type(username);
-  cy.findById('password').type(password);
-  cy.clickButton(buttonId);
+Cypress.Commands.add('login', (username, password, buttonId) => {
+  cy.findBySelector('userName').type(username);
+  cy.findBySelector('password').type(password);
+  cy.clickOnButton(buttonId);
 });
 
-Cypress.Commands.add('loginViaApi', (username, password) => {
+Cypress.Commands.add('apiLogin', (username, password) => {
   cy.request({
     method: 'POST',
     url: 'https://demoqa.com/Account/v1/Login',
@@ -53,6 +53,6 @@ Cypress.Commands.add('loginViaApi', (username, password) => {
   });
 });
 
-Cypress.Commands.add('findByClass', (classOfelement) => {
-    cy.get(`.${classOfelement}`);
+Cypress.Commands.add('findByClass', (selector) => {
+    cy.get(`.${selector}`);
   });
