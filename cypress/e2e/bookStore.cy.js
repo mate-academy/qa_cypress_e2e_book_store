@@ -6,7 +6,7 @@ describe('Book Store app', () => {
     password: 'HappyPony123!',
     textForSearching: 'Speaking JavaScript',
     author: 'Axel Rauschmayer',
-    publisher: "O'Reilly Media"
+    publisher: 'O\'Reilly Media'
   };
 
   it('should provide an ability to login', () => {
@@ -21,7 +21,7 @@ describe('Book Store app', () => {
     cy.url().should('include', '/profile');
   });
 
-	it('should allow to search for the book', () => {
+  it('should allow to search for the book', () => {
     cy.login(user.username, user.password);
     cy.visit('/books');
     cy.get('#searchBox')
