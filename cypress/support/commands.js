@@ -23,3 +23,36 @@
 //
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
+Cypress.Commands.add('findBySelector', (id) => {
+  cy.get(`#${id}`);
+});
+
+Cypress.Commands.add('clickOnButton', (id) => {
+  cy.findBySelector(id).click();
+});
+
+Cypress.Commands.add('login', (username, password, buttonId) => {
+  cy.findBySelector('userName').type(username);
+  cy.findBySelector('password').type(password);
+  cy.clickOnButton(buttonId);
+});
+
+Cypress.Commands.add('apiLogin', (username, password) => {
+  cy.request({
+    method: 'POST',
+    url: 'https://demoqa.com/Account/v1/Login',
+    body: {
+      userName: `${username}`,
+      password: `${password}`,
+    },
+  }).then((response) => {
+    cy.setCookie('token', response.body.token);
+    cy.setCookie('userID', response.body.userId);
+    cy.setCookie('yserName', response.body.username);
+    cy.setCookie('expires', response.body.expires);
+  });
+});
+
+Cypress.Commands.add('findByClass', (selector) => {
+    cy.get(`.${selector}`);
+  });
