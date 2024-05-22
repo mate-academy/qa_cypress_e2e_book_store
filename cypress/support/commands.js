@@ -23,3 +23,27 @@
 //
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
+Cypress.Commands.add('findByPlaceholder', (placeholder) => {
+  cy.get(`input[placeholder="${placeholder}"]`);
+});
+
+Cypress.Commands.add('login', (user) => {
+  cy.request('POST', 'http://demoqa.com/Account/v1/Login', {
+    userName: user.username,
+    password: user.password
+  }).then((response) => {
+    cy.setCookie('userID', response.body.userId);
+    cy.setCookie('token', response.body.token);
+    cy.setCookie('userName', response.body.username);
+    cy.setCookie('expires', response.body.expires);
+  });
+});
+
+Cypress.Commands.add('deleteBook', (isbnToDelete, userId) => {
+  cy.request('DELETE', 'http://demoqa.com/BookStore/v1/Book', {
+    isbn: isbnToDelete,
+    userID: userId
+  }).then((response) => {
+    expect(response.status).to.equal('204');
+  });
+});
