@@ -23,3 +23,20 @@
 //
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
+
+// const { values } = require("cypress/types/lodash");
+
+Cypress.Commands.add('login', (user) => {
+    cy.request('POST', 'https://demoqa.com/Account/v1/Login', {
+        userName: user.username,
+        password: user.password,
+    }).then((response) => {
+        cy.setCookie('userID', response.body.userId);
+        cy.setCookie('token', response.body.token);
+        cy.setCookie('userName', response.body.username);
+        cy.setCookie('expires', response.body.expires);
+    });
+});
+
+
+
