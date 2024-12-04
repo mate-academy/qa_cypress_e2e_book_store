@@ -15,7 +15,7 @@
 
 App for testing: [BookStore](https://demoqa.com/register)
 
-[Create](https://demoqa.com/register) your account **manually** before completing the task.  
+[Create](htps://demoqa.com/register) your account **manually** beftore completing the task.  
 
 **Your task** is to check the following flow:
 
