@@ -1,6 +1,6 @@
 function userInfo() {
-  const username = 'gustavotest1234';
-  const password = 'test1234';
+  const username = 'Gusith';
+  const password = 'Gusith1!_';
 
   return {
     username,
