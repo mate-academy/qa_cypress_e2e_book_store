@@ -23,3 +23,23 @@
 //
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
+
+Cypress.Commands.add('Login', (username, password) => {
+    
+    // cy.get('#userName').type(username);
+    // cy.get('#password').type(password + '{enter}');
+    cy.request({
+        method: 'POST',
+        url: 'https://demoqa.com/Account/v1/Login',
+        body: {
+            userName: username,
+            password: password
+        },
+    }).then(response => {
+        cy.setCookie('token', response.body.token),
+        cy.setCookie('userID', response.body.userId),
+        cy.setCookie('userName', response.body.username),
+        cy.setCookie('expires', response.body.expires)
+    });
+   
+})
