@@ -23,3 +23,26 @@
 //
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
+Cypress.Commands.add('login', (user) => {
+  cy.request('POST', 'https://demoqa.com/Account/v1/Login', {
+    userName: user.username,
+    password: user.password
+  }).then((response) => {
+    cy.setCookie('userID', response.body.userId);
+    cy.setCookie('token', response.body.token);
+    cy.setCookie('expires', response.body.expires);
+    cy.setCookie('userName', response.body.username);
+  });
+});
+
+Cypress.Commands.add('alertBookAdded', () => {
+  cy.on('window:alert', (str) => {
+    expect(str).to.equal(`Book added to your collection.`)
+})
+});
+
+Cypress.Commands.add('alertBookDeleted', () => {
+  cy.on('window:alert', (str) => {
+    expect(str).to.equal(`Book deleted.`)
+})
+});
