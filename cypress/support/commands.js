@@ -23,3 +23,13 @@
 //
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
+
+// Tworzenie funkcji findByPlaceholder
+// funkcja findByPlaceholder przyjmować będzie parametr placeholder którego szukamy
+// oraz parametr tag (który jest opcjonalny można ale nie trzeba go podawać)
+// funkcja findByPlaceholder działa w ten sposób że szuka na stronie obiektu który
+// posiada podany placeholder i w nim staje.
+Cypress.Commands.add('findByPlaceholder', (placeholder, tag = 'input') => {
+  // znajdź(`taki tag dla którego {placeholder} został podany`)
+  cy.get(`${tag}[placeholder="${placeholder}"]`);
+});
