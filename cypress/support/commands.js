@@ -23,3 +23,16 @@
 //
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
+Cypress.Commands.add('findByPlaceholder', (placeholder) => {
+  cy.get(`[placeholder="${placeholder}"]`);
+});
+Cypress.Commands.add('CheckDeleteAlert', () => {
+  cy.once('window:alert', (str) => {
+    expect(str).to.equal(`Book deleted.`);
+  });
+});
+Cypress.Commands.add('CheckBookAdded', () => {
+  cy.once('window:alert', (str) => {
+    expect(str).to.equal(`Book added to your collection.`);
+  });
+});
