@@ -19,9 +19,11 @@ import './commands';
 // Alternatively you can use CommonJS syntax:
 // require('./commands')
 
-Cypress.on('uncaught:exception', () => {
-  return false;
-});
+// Cypress.on('uncaught:exception', () => {
+//   return false;
+// });
+
+Cypress.on('uncaught:exception', () => false);
 
 const app = window.top;
 if (!app.document.head.querySelector('[data-hide-command-log-request]')) {
